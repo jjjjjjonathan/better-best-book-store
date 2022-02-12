@@ -11,7 +11,11 @@
       </div>
       <div class="advanced-search-form">
         <label for="isbn">ISBN</label>
-        <input type="text" maxlength="13" pattern="[0-9]" placeholder="Enter a 13-digit ISBN-13 number" name="isbn">
+        <input type="text" maxlength="13" pattern="[0-9]" placeholder="Enter a 13-digit ISBN-13 number" name="isbn" oninvalid="alert('numbers only')">
+      </div>
+      <div class="advanced-search-form">
+        <label for="genre">Genre</label>
+        <input type="text" name="genre">
       </div>
       <div class="advanced-search-form">
         <label for="min-price">Minimum price</label>
