@@ -7,8 +7,7 @@ CREATE TABLE items (
   title VARCHAR(255) NOT NULL,
   description TEXT,
   price INTEGER NOT NULL,
-  sold_status BOOLEAN,
+  sold_status BOOLEAN DEFAULT FALSE,
   created_at DATE DEFAULT now(),
   genre VARCHAR(255) NOT NULL
-
 );
