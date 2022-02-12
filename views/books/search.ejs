@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Advanced Search - Once Upon a Book</title>
+  </head>
   <body>
-    hello search
+    <form action="" method="GET" id="advanced-search-form" class="advanced-search-form">
+      <div class="advanced-search-form">
+        <label for="title-keywords">Keywords in title</label>
+        <input type="text" name="title-keywords">
+      </div>
+      <div class="advanced-search-form">
+        <label for="isbn">ISBN</label>
+        <input type="text" maxlength="13" pattern="[0-9]" placeholder="Enter a 13-digit ISBN-13 number" name="isbn">
+      </div>
+      <div class="advanced-search-form">
+        <label for="min-price">Minimum price</label>
+        <input type="text" name="min-price">
+        <label for="max-price">Maximum price</label>
+        <input type="text" name="max-price">
+      </div>
+      <div class="advanced-search-form">
+        <label for="location">Location</label>
+        <input type="text" name="location" placeholder="Enter a city">
+      </div>
+      <div class="advanced-search-form">
+        <button type="submit">Search</button>
+      </div>
+    </form>
   </body>
 </html>
