@@ -38,11 +38,13 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const widgetsPageRoutes = require("./routes/widgetsPage");
+const itemPreviewRoutes = require("./routes/item_preview");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
+app.use("/api/items", itemPreviewRoutes(db));
 
 app.use("/widgets", widgetsPageRoutes(db));
 
