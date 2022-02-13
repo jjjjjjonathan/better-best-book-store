@@ -4,6 +4,7 @@ const router = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     // should turn queryString generator into a function
+    // currently only works with title and genre
     const search = req.query;
     console.log(search);
     const queryParams = [];
