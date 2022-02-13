@@ -46,7 +46,7 @@ const itemPreviewRoutes = require("./routes/item_preview");
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
-app.use("/api/items", itemPreviewRoutes(db));
+app.use("/items", itemPreviewRoutes(db));
 
 app.use("/widgets", widgetsPageRoutes(db));
 app.use("/books", bookRoutes());
