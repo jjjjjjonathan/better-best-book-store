@@ -47,9 +47,8 @@ const itemPreviewRoutes = require("./routes/item_preview");
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/items", itemPreviewRoutes(db));
-
 app.use("/widgets", widgetsPageRoutes(db));
-app.use("/books", bookRoutes());
+app.use("/books", bookRoutes(db));
 app.use("/listings", listingsRoutes());
 
 // Note: mount other resources here, using the same pattern above

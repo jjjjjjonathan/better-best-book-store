@@ -3,7 +3,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/:id", (req, res) => {
-    console.log("this is req.params.id", req.params.id);
+    console.log(req.params);
     return db
       .query(
         `SELECT * , photo_urls FROM items JOIN photo_urls ON item_id = items.id WHERE items.id = $1 GROUP BY items.id, photo_urls.id;`,
