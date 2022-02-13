@@ -1,0 +1,22 @@
+#container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  width: 80%;
+  margin: 50px auto;
+
+  li {
+    list-style: none;
+    color: white;
+    font-size: 0.5em;
+  }
+  #book-title {
+    font-size: 0.7em;
+  }
+  #cover-image {
+    width: 50%;
+    padding: 50px;
+  }
+}
