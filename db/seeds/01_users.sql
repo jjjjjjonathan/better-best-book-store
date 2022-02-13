@@ -1,3 +1,32 @@
 -- Users table seeds here (Example)
-INSERT INTO users (name) VALUES ('Alice');
-INSERT INTO users (name) VALUES ('Kira');
+INSERT INTO users (username, name, email, password, city) VALUES ('amdhill73','Armand Hilll','armandhill@gmail.com','$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'Toronto'),
+('dg734','Della Gordon', 'clairemelendez@live.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'Toronto'),
+('bruce77','Bruce Summers', 'keiraclay@outlook.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Toronto'),
+('sandersharvery','Harvey Sanders', 'huntermclaughlin@mail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Vancouver' ),
+('leibutler','Lelia Butler', 'jaycemeyer@live.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Montreal'),
+('canson','Carrie Hanson', 'sebastiangibbs@mail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Vancouver'),
+('kia88','Mabel Barrett', 'kaitlynhickman@yahoo.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Vancouver'),
+('jasonmomoa33','Jean Rowe', 'giannasullivan@live.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Vancouver'),
+('healthybody','Christine Ortega', 'christianpruitt@outlook.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Toronto'),
+('newmee','Larry Pearson', 'owenhamilton@gmx.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Toronto'),
+('iamacat','Shane Lee', 'wyattyates@yahoo.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Toronto'),
+('shymee','Russell Vega', 'brooklynraymond@hotmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Toronto'),
+('hayleywilliam','Hallie Maxwell', 'ianelliott@gmx.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Toronto'),
+('bakekok','Matilda Lawrence', 'alicestuart@icloud.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Toronto'),
+('coolkid','Ann Mack', 'isabellemiranda@gmx.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Montreal'),
+('garmc','Garrett McCormick', 'charliehahn@mail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Montreal'),
+('blueberry','Mabel Berry', 'williamnavarro@icloud.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Montreal'),
+('locker','Lora Walker', 'claireashley@yahoo.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Montreal'),
+('salaryman','Lora Gordon', 'adriananthony@outlook.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Montreal'),
+('iwishiknew','Vincent Ellis', 'asherharrell@gmx.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Montreal'),
+('dragon77','Angel Tate', 'jasminepage@mail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Calgary'),
+('hastalavista','Adeline Hunter', 'pipermelton@gmx.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Calgary'),
+('summercamp','Evelyn Carter', 'oliverjuarez@gmx.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Calgary'),
+('cuteme','Sean Butler', 'dominicwheeler@gmx.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Calgary'),
+('cutecat','Addie Ryan', 'isabellekirk@ymail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Calgary'),
+('strangerdanger','Isabel Frank', 'nathanburks@google.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Calgary'),
+('youaremysunshine','Rhoda Clarke', 'wyattchase@ymail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Calgary'),
+('cannotsaynot','Jean Becker', 'isabelleryan@outlook.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.','Calgary');
+
+
+

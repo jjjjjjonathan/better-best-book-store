@@ -1,0 +1,31 @@
+footer {
+  position: relative;
+  background: rgb(67, 82, 86);
+  background: linear-gradient(
+    227deg,
+    rgb(20, 31, 45) 0%,
+    rgb(19, 30, 38) 20%,
+    rgb(26, 24, 24) 34%,
+    rgb(31, 31, 31) 59%,
+    rgb(30, 36, 37) 74%,
+    rgb(35, 44, 45) 100%
+  );
+  bottom: -600px;
+  #social-media {
+    display: flex;
+    color: white;
+    flex-direction: row;
+    list-style: none;
+    padding: 100px;
+    justify-content: space-around;
+  }
+  #social-media .fa-brands:hover {
+    color: rgb(67, 82, 86);
+  }
+  p {
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    padding-bottom: 40px;
+  }
+}
