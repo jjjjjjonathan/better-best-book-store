@@ -36,7 +36,8 @@ app.use(express.static("public"));
 
 app.use(cookieSession({
   name: 'session',
-  keys: ['40ed1e00-25ea-4136-bc6b-e7451fb3d11a', 'f92c5252-5913-4bfa-82a6-1cffe026956f']
+  keys: ['40ed1e00-25ea-4136-bc6b-e7451fb3d11a', 'f92c5252-5913-4bfa-82a6-1cffe026956f'],
+  maxAge: 24 * 60 * 60 * 1000
 }));
 
 // Separated Routes for each Resource
@@ -47,6 +48,7 @@ const widgetsPageRoutes = require("./routes/widgetsPage");
 const bookRoutes = require("./routes/books");
 const listingsRoutes = require("./routes/listings");
 const itemPreviewRoutes = require("./routes/item_preview");
+const authRoutes = require("./routes/auth");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -56,6 +58,7 @@ app.use("/items", itemPreviewRoutes(db));
 app.use("/widgets", widgetsPageRoutes(db));
 app.use("/books", bookRoutes(db));
 app.use("/listings", listingsRoutes());
+app.use("/auth", authRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
 

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  </head>
+  <body>
+    <form action="">
+      <select name="user_id"">
+
+        <% for (const item of items) { %>
+          <option value=""><%= item.name %></option>
+        <% } %>
+      </select>
+
+      <button type="submit">Login</button>
+    </form>
+  </body>
+</html>
