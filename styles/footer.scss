@@ -1,6 +1,5 @@
 footer {
   position: relative;
-  height: 100vh;
   background: rgb(67, 82, 86);
   background: linear-gradient(
     227deg,
@@ -11,7 +10,7 @@ footer {
     rgb(30, 36, 37) 74%,
     rgb(35, 44, 45) 100%
   );
-  bottom: -500px;
+  bottom: -600px;
   #social-media {
     display: flex;
     color: white;
@@ -27,5 +26,6 @@ footer {
     font-size: 20px;
     text-align: center;
     color: white;
+    padding-bottom: 40px;
   }
 }
