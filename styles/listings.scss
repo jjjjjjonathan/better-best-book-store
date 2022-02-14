@@ -1,0 +1,16 @@
+#edit-delete {
+  display: flex;
+  .listing-button {
+    display: flex;
+    margin: 10px;
+    text-decoration: none;
+  }
+  button {
+    background-color: rgb(173, 159, 242);
+    color: antiquewhite;
+    border-radius: 4px;
+  }
+  button:hover {
+    background-color: rgb(120, 130, 138);
+  }
+}
