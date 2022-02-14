@@ -1,0 +1,18 @@
+nav {
+  position:relative;
+}
+
+.brand-typo {
+  color: black;
+  font-size: 35px;
+  font-family: 'Cinzel Decorative', cursive;
+}
+
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-text {
+  padding-right: 30px;
+}
