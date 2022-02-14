@@ -1,5 +1,4 @@
 // Function to generate query strings and query parameters to search for books
-// should turn queryString generator into a function
 // currently only works with title and genre
 const searchQueryGenerator = queryObj => {
   const queryParams = [];
