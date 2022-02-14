@@ -10,13 +10,13 @@ footer {
     rgb(30, 36, 37) 74%,
     rgb(35, 44, 45) 100%
   );
-  bottom: -600px;
+  // bottom: -600px;
   #social-media {
     display: flex;
     color: white;
     flex-direction: row;
     list-style: none;
-    padding: 100px;
+    padding: 40px;
     justify-content: space-around;
   }
   #social-media .fa-brands:hover {
@@ -27,5 +27,6 @@ footer {
     text-align: center;
     color: white;
     padding-bottom: 40px;
+    font-family: 'Cinzel Decorative', cursive;
   }
 }
