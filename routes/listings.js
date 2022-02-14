@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const cookieSession = require("cookie-session");
 
 module.exports = (db) => {
-  router.get("/user/:id", (req, res) => {
+  router.get("/user", (req, res) => {
     const userId = req.session.user_id;
     if (!userId) {
       console.log("cannot be here");
@@ -27,14 +26,17 @@ module.exports = (db) => {
     }
   });
 
-  router.post("/user/delete/:item_id/:id", (req, res) => {
-    const userId = req.params.id;
-    db.query(`DELETE FROM items WHERE items.id = $1`, [
-      req.params.item_id,
-    ]).then((data) => {
-      console.log(data.rows);
-      res.redirect(`/listings/user/${userId}`);
-    });
+  router.post("/user/:item_id", (req, res) => {
+    const userId = req.session.user_id;
+    if (userId) {
+      db.query(`DELETE FROM items WHERE items.id = $1`, [
+        req.params.item_id,
+      ]).then((data) => {
+        console.log(data.rows);
+        res.redirect(`/listings/user`);
+      });
+    }
+    res.redirect("/");
   });
   return router;
 };

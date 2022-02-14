@@ -18,6 +18,9 @@ footer {
     list-style: none;
     padding: 40px;
     justify-content: space-around;
+    width: 30%;
+    font-size: 2em;
+    margin: 0 auto;
   }
   #social-media .fa-brands:hover {
     color: rgb(67, 82, 86);
@@ -27,6 +30,6 @@ footer {
     text-align: center;
     color: white;
     padding-bottom: 40px;
-    font-family: 'Cinzel Decorative', cursive;
+    font-family: "Cinzel Decorative", cursive;
   }
 }
