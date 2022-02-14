@@ -62,7 +62,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.use("/books/item", itemPreviewRoutes(db));
 app.use("/widgets", widgetsPageRoutes(db));
 app.use("/books", bookRoutes(db));
-app.use("/listings", listingsRoutes());
+app.use("/listings", listingsRoutes(db));
 app.use("/auth", authRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
