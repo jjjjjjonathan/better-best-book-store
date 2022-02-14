@@ -20,9 +20,4 @@ const searchQueryGenerator = queryObj => {
   return [queryString, queryParams];
 };
 
-// Generate random string for listing URLs
-const generateRandomString = () => {
-  return Math.floor((1 + Math.random()) * 0x100000000000).toString(16).substring(1);
-};
-
-module.exports = { searchQueryGenerator, generateRandomString };
+module.exports = { searchQueryGenerator };
