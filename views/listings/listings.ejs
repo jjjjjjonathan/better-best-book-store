@@ -55,7 +55,11 @@
       <li>Genre: <%= item.genre %></li>
       <div id="edit-delete">
         <li>
-          <a href="" class="listing-button"><button>Edit</button></a>
+          <a
+            href="/listings/user/item/<%= item.item_id %>"
+            class="listing-button"
+            ><button>Edit</button></a
+          >
         </li>
         <li>
           <a href="" class="listing-button"><button>Mark Sold</button></a>
