@@ -26,7 +26,7 @@
       </div>
       <div class="advanced-search-form">
         <label for="isbn">ISBN</label>
-        <input type="text" maxlength="13" pattern="[0-9]" placeholder="Enter a 13-digit ISBN-13 number" name="isbn" oninvalid="alert('numbers only')">
+        <input type="text" maxlength="13" pattern="[0-9]" placeholder="Enter a 13-digit ISBN-13 number" name="isbn" oninvalid="alert('numbers only')" disabled="disabled">
       </div>
       <div class="advanced-search-form">
         <label for="genre">Genre</label>
@@ -34,13 +34,13 @@
       </div>
       <div class="advanced-search-form">
         <label for="min-price">Minimum price</label>
-        <input type="text" name="min-price">
+        <input type="text" name="min-price" disabled="disabled">
         <label for="max-price">Maximum price</label>
-        <input type="text" name="max-price">
+        <input type="text" name="max-price" disabled="disabled">
       </div>
       <div class="advanced-search-form">
         <label for="location">Location</label>
-        <input type="text" name="location" placeholder="Enter a city">
+        <input type="text" name="location" placeholder="Enter a city" disabled="disabled">
       </div>
       <div class="advanced-search-form">
         <button type="submit">Search</button>
