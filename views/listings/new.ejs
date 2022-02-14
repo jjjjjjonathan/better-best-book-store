@@ -19,7 +19,7 @@
     <script type="text/javascript" src="/scripts/index.js"></script>
   </head>
   <body>
-    <form action="/listings/user" method="POST" id="add-listing-form">
+    <form action="/listings/new" method="POST" id="add-listing-form">
       <div class="new-listing-form">
         <label for="isbn">ISBN</label>
         <input type="text" name="isbn" disabled="disabled">
@@ -34,7 +34,7 @@
       </div>
       <div class="new-listing-form">
         <label for="price">Price</label>
-        <input type="text" name="Price">
+        <input type="number" name="price">
       </div>
       <div class="new-listing-form">
         <label for="genre">Genre</label>
