@@ -32,12 +32,11 @@ module.exports = (db) => {
     db.query(`DELETE FROM items WHERE items.id = $1`, [
       req.params.item_id,
     ]).then((data) => {
-      console.log(data.rows);
       res.redirect(`/listings/user`);
     });
   });
 
-  router.get("/user/item/edit/:item_id", (req, res) => {
+  router.get(`/user/item/edit/:item_id`, (req, res) => {
     const itemId = req.params.item_id;
     return db
       .query(
@@ -62,5 +61,42 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  router.post("/user/item/edit/:item_id", (req, res) => {
+    const itemId = req.params.item_id;
+    const itemBody = req.body;
+    console.log("This is item body", itemBody);
+    console.log("This is itemID", itemId);
+    console.log(res.rows);
+    return db
+      .query(
+        `UPDATE items SET title = $1,description = $2, price = $3, genre = $4 WHERE items.id = $5 RETURNING *;`,
+        [
+          itemBody.Title,
+          itemBody.Description,
+          itemBody.Price,
+          itemBody.Genre,
+          itemId,
+        ]
+      )
+      .then((data) => {
+        const users = data.rows[0];
+        console.log(data);
+        const templateVars = {
+          id: itemId,
+          cover: users.photo_url,
+          Title: users.title,
+          Description: users.description,
+          Price: users.price,
+          sold_status: users.sold_status,
+          Genre: users.genre,
+        };
+        res.render(`listings/edit`, templateVars);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   return router;
 };

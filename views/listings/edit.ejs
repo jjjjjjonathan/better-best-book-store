@@ -55,17 +55,17 @@
       <li>Genre: <%= Genre %></li>
     </ul>
     <div>
-      <form action="/user/item/<%= id %>" method="POST" id="edit-form">
+      <form action="<%= id %>" method="POST" id="edit-form">
         <label for="Title">Title</label>
         <input type="text" name="Title" placeholder="<%= Title %>" />
         <label for="image-url">Image</label>
         <input type="image" name="cover-url" />
         <label for="Description">Description</label>
-        <input
+        <textarea
           type="text"
           name="Description"
           placeholder="<%= Description %>"
-        />
+        ></textarea>
         <label for="Price">Price</label>
         <input type="number" name="Price" placeholder="<%= Price %>" />
         <label for="Genre">Genre</label>
