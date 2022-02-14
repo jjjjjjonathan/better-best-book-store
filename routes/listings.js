@@ -38,5 +38,9 @@ module.exports = (db) => {
     }
     res.redirect("/");
   });
+
+  router.get("/new", (req, res) => {
+    res.render("listings/new");
+  });
   return router;
 };
