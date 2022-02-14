@@ -11,25 +11,57 @@
     />
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/nav_bar.css" type="text/css" />
     <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
 
+    <script src="https://kit.fontawesome.com/3e656a71a0.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/index.js"></script>
+
   </head>
 
   <body>
-    <h1>Have fun! 🥔</h1>
+  <%- include("partials/_navbar") %>
+  <main>
+    <div class="main-box">
+      <a class="title">Give a second life to your books !</a>
+      <img id="image-main-box" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/3e181968837473.5b6b11d5d3bb8.gif"/>
+    </div>
+   <div class="central-box">
+    <div class="buy-box" onclick="window.location='www.google.com';">
+      <h1>Buy books</h1>
+    </div>
+    <div class="sell-box" onclick="window.location='www.google.com';">
+      <h1>Sell books</h1>
+    </div>
+  </div>
+    <div class="new-books" onclick="window.location='www.google.com';">
+      <h1>Check out what's new</h1>
+    </div>
 
     <a href="widgets">Show All Widgets</a>
 
-    <div>
+    <!-- <div>
       <button id="users">Show Users</button>
       <button id="clear">Clear</button>
-    </div>
+    </div> -->
 
     <ul id="list"></ul>
+  </main>
     <footer><%- include("partials/_footer") %></footer>
+
+    <!-- Bootstrap plugin JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
   </body>
 </html>
