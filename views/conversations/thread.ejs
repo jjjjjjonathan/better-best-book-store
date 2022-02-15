@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+  </head>
+  <body>
+    <ul>
+      <% for (const message of messageThread) { %>
+        <li>From <%= message.sender %>: <%= message.message_body %></li>
+      <% } %>
+    </ul>
+  </body>
+</html>
