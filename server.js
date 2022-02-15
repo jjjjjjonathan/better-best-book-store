@@ -54,6 +54,7 @@ const bookRoutes = require("./routes/books");
 const listingsRoutes = require("./routes/listings");
 const itemPreviewRoutes = require("./routes/item_preview");
 const authRoutes = require("./routes/auth");
+const conversationRoutes = require("./routes/conversations");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -64,6 +65,7 @@ app.use("/widgets", widgetsPageRoutes(db));
 app.use("/books", bookRoutes(db));
 app.use("/listings", listingsRoutes(db));
 app.use("/auth", authRoutes(db));
+app.use("/conversations", conversationRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
 

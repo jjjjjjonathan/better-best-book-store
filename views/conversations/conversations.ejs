@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+  </head>
+  <body>
+    <% if (messages) { %>
+      <ul>
+        <% for (const thread of messages) { %>
+          <li>Thread #<%= thread.message_count %> between <%= thread.user1 %> and <%= thread.user2 %>.</li>
+        <% } %>
+      </ul>
+    <% } %>
+  </body>
+</html>

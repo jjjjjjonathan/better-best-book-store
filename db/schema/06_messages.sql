@@ -1,11 +1,10 @@
-DROP TABLE IF EXISTS items CASCADE;
+DROP TABLE IF EXISTS messages CASCADE;
 
 CREATE TABLE messages (
   id SERIAL PRIMARY KEY NOT NULL,
   item_id INTEGER REFERENCES items(id),
   sender_id INTEGER REFERENCES users(id),
-  receiver_id INTEGER REFERENCES users(id),
+  conversation_id INTEGER REFERENCES conversations(id),
   message_body TEXT NOT NULL,
-  sent_at DATE DEFAULT now(),
-  unread_status BOOLEAN DEFAULT true
+  sent_at DATE DEFAULT now()
 );
