@@ -8,7 +8,7 @@ module.exports = db => {
     if (!userId) {
       res.render("index");
     } else {
-      return db.query(`SELECT count(messages.*) as message_count, conversations.user1_id as user1, conversations.user2_id as user2
+      return db.query(`SELECT conversations.id, count(messages.*) as message_count, conversations.user1_id as user1, conversations.user2_id as user2
       FROM messages
       JOIN conversations ON messages.conversation_id = conversations.id
       WHERE conversations.user1_id = ${userId}
