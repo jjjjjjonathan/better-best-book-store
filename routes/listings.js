@@ -64,6 +64,18 @@ module.exports = (db) => {
       });
   });
 
+  router.get("/new", (req, res) => {
+    res.render("listings/new");
+  });
+
+  router.post("/new", (req, res) => {
+    console.log(req.body);
+    db.query(`INSERT INTO items (owner_id, title, description, price, genre) VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [req.session['user_id'], req.body.title, req.body.description, parseFloat(req.body.price), req.body.genre])
+      .then(data => {
+        console.log(data.rows);
+        res.redirect("../");
+      });
+  });
   router.post("/user/item/edit/:item_id", (req, res) => {
     const itemId = req.params.item_id;
     const itemBody = req.body;
