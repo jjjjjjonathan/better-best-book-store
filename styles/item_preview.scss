@@ -15,12 +15,20 @@
   }
   #book-title {
     font-size: 2.5em;
+    font-family: 'Cinzel Decorative', cursive;
   }
   #cover-image {
     width: 30%;
     padding: 50px;
   }
+  .descritpion {
+    border: 4px solid;
+    border-color: black;
+    border-radius: 5%;
+  }
 }
+
+
 
 .buttons-item {
 display: flex;
@@ -33,8 +41,8 @@ align-content:space-between;
 }
 
 #fav-button i:hover {
-  color:rgb(200, 80, 233)
+  color:rgb(113, 80, 233)
 }
-#fav-button i:focus {
-  color:rgb(200, 80, 233)
+#fav-button:focus {
+  color:rgb(113, 80, 233)
 }
