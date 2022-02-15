@@ -92,6 +92,7 @@ return db.query(queryString, values)
     console.log(items)
     const templateVars = {
       items: items,
+      username: req.session['name']
     };
     res.render("books/favorites", templateVars);
   })

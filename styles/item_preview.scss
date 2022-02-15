@@ -8,7 +8,7 @@
   margin: 50px auto;
   padding: 30px;
 
-  li {
+  #container li {
     list-style: none;
     color: black;
     font-size: 1.5em;
@@ -21,14 +21,8 @@
     width: 30%;
     padding: 50px;
   }
-  .descritpion {
-    border: 4px solid;
-    border-color: black;
-    border-radius: 5%;
-  }
+
 }
-
-
 
 .buttons-item {
 display: flex;
