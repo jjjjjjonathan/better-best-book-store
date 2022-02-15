@@ -70,7 +70,10 @@ module.exports = (db) => {
     console.log(res.rows);
     return db
       .query(
-        `UPDATE items SET title = $1,description = $2, price = $3, genre = $4 WHERE items.id = $5 RETURNING *;`,
+        `UPDATE items
+         SET title = $1,description = $2, price = $3,
+        genre = $4 WHERE items.id = $5 RETURNING *;
+         `,
         [
           itemBody.Title,
           itemBody.Description,
@@ -79,18 +82,23 @@ module.exports = (db) => {
           itemId,
         ]
       )
-      .then((data) => {
-        const users = data.rows[0];
-        console.log(data);
+      .then(() => {
+        return db.query(
+          `UPDATE photo_urls SET photo_url = $1 WHERE item_id = $2;`,
+          [itemBody.photo_url, itemId]
+        );
+      })
+      .then(() => {
         const templateVars = {
           id: itemId,
-          cover: users.photo_url,
-          Title: users.title,
-          Description: users.description,
-          Price: users.price,
-          sold_status: users.sold_status,
-          Genre: users.genre,
+          cover: itemBody.photo_url,
+          Title: itemBody.Title,
+          Description: itemBody.Description,
+          Price: itemBody.Price,
+          sold_status: itemBody.Sold_status,
+          Genre: itemBody.Genre,
         };
+        console.log(templateVars);
         res.render(`listings/edit`, templateVars);
       })
       .catch((err) => {

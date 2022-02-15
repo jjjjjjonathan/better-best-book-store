@@ -57,19 +57,15 @@
     <div>
       <form action="<%= id %>" method="POST" id="edit-form">
         <label for="Title">Title</label>
-        <input type="text" name="Title" placeholder="<%= Title %>" />
+        <input type="text" name="Title" value="<%= Title %>" />
         <label for="image-url">Image</label>
-        <input type="image" name="cover-url" />
+        <input type="text" name="photo_url" value="<%= cover %>" />
         <label for="Description">Description</label>
-        <textarea
-          type="text"
-          name="Description"
-          placeholder="<%= Description %>"
-        ></textarea>
+        <input type="text" name="Description" value="<%= Description %>" />
         <label for="Price">Price</label>
-        <input type="number" name="Price" placeholder="<%= Price %>" />
+        <input type="number" name="Price" value="<%= Price %>" />
         <label for="Genre">Genre</label>
-        <input type="text" name="Genre" placeholder="<%= Genre %>" />
+        <input type="text" name="Genre" value="<%= Genre %>" />
         <button type="submit" id="#subit-edit">Submit</button>
       </form>
     </div>
