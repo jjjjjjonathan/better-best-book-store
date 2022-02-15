@@ -6,5 +6,5 @@ CREATE TABLE messages (
   sender_id INTEGER REFERENCES users(id),
   conversation_id INTEGER REFERENCES conversations(id),
   message_body TEXT NOT NULL,
-  sent_at DATE DEFAULT now()
+  sent_at TIMESTAMP DEFAULT now()
 );
