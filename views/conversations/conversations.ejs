@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+  </head>
+  <body>
+    <% if (!messages) { %>
+      <p>no messages no one is talking to you</p>
+
+    <% } else { %>
+      <ul>
+        <% for (const thread of messages) { %>
+          <li><a href="/conversations/<%= thread.id %>"><%= thread.message_count %> messages between <%= thread.name1 %> and <%= thread.name2 %>. Last message time: <%= thread.last_message_time %></a></li>
+        <% } %>
+      </ul>
+    <% } %>
+  </body>
+</html>
