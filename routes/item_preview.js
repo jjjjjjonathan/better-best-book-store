@@ -13,6 +13,7 @@ module.exports = (db) => {
         const users = data.rows[0];
         console.log(users)
         const templateVars = {
+          id: users.item_id,
           cover: users.photo_url,
           Title: users.title,
           Description: users.description,
