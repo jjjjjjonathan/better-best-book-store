@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
     <link rel="stylesheet" href="/styles/listings.css" type="text/css" />
     <link rel="stylesheet" href="/styles/item_preview.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/edit_page.css" type="text/css" />
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -43,40 +44,31 @@
     <script type="text/javascript" src="/scripts/index.js"></script>
   </head>
   <body>
-    <header><%- include("../partials/_navbar") %></header>
-    <% for(const item of items) { %>
+    <%- include("../partials/_navbar") %>
     <ul id="container">
-      <li id="book-title"><%= item.title %></li>
-      <img id="cover-image" src="<%= item.photo_url %>" alt="" />
-      <li><%= item.description %></li>
+      <li id="book-title"><%= Title %></li>
+      <img id="cover-image" src="<%= cover %>" alt="" />
+      <li><%= Description %></li>
       <br />
-      <li>Price: $<%= item.price %></li>
+      <li>Price: $<%= Price %></li>
       <br />
-      <li>Genre: <%= item.genre %></li>
-      <div id="edit-delete">
-        <li>
-          <a
-            href="/listings/user/item/edit/<%= item.item_id %>"
-            class="listing-button"
-            ><button>Edit</button></a
-          >
-        </li>
-        <li>
-          <a href="" class="listing-button"><button>Mark Sold</button></a>
-        </li>
-        <li>
-          <form
-            action="user/<%= item.item_id %>"
-            class="listing-button"
-            method="POST"
-          >
-            <button type="submit" id="deleteItem">Delete</button>
-          </form>
-        </li>
-      </div>
+      <li>Genre: <%= Genre %></li>
     </ul>
-
-    <% } %>
+    <div>
+      <form action="<%= id %>" method="POST" id="edit-form">
+        <label for="Title">Title</label>
+        <input type="text" name="Title" value="<%= Title %>" />
+        <label for="image-url">Image</label>
+        <input type="text" name="photo_url" value="<%= cover %>" />
+        <label for="Description">Description</label>
+        <input type="text" name="Description" value="<%= Description %>" />
+        <label for="Price">Price</label>
+        <input type="number" name="Price" value="<%= Price %>" />
+        <label for="Genre">Genre</label>
+        <input type="text" name="Genre" value="<%= Genre %>" />
+        <button type="submit" id="#subit-edit">Submit</button>
+      </form>
+    </div>
 
     <footer><%- include("../partials/_footer") %></footer>
     <!-- Bootstrap plugin JS -->
