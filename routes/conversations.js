@@ -39,7 +39,7 @@ module.exports = db => {
     JOIN conversations ON conversations.id = messages.conversation_id
     JOIN users ON messages.sender_id = users.id
     WHERE conversations.id = $1
-    ORDER BY sent_at DESC;`, [req.params.id])
+    ORDER BY sent_at;`, [req.params.id])
       .then(data => {
         const messageThread = data.rows;
         const templateVars = { messageThread, user: req.session['user_id'] };
@@ -52,7 +52,7 @@ module.exports = db => {
     return db.query(`INSERT INTO messages (sender_id, conversation_id, message_body)
     VALUES ($1, $2, $3);`, [req.session['user_id'], parseFloat(req.params.id), req.body.message])
       .then(() => {
-        db.query(`UPDATE conversations SET last_message_time = now() WHERE id = ${parseFloat(req.params.id)};`);
+        db.query(`UPDATE conversations SET last_message_time = CURRENT_TIMESTAMP() WHERE id = ${parseFloat(req.params.id)};`);
       })
       .then(() => {
         res.redirect(`/conversations/${req.params.id}`);
