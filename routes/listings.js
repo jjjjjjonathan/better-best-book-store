@@ -9,8 +9,8 @@ module.exports = (db) => {
     }
     return db
       .query(
-        `SELECT items.* , photo_urls.photo_url FROM items LEFT JOIN photo_urls ON item_id = items.id JOIN users ON users.id = items.owner_id WHERE users.id = $1 GROUP BY items.id, photo_urls.id, users.id;`,
-        [req.session.user_id]
+        `SELECT items.* , photo_urls.photo_url FROM items LEFT JOIN photo_urls ON item_id = items.id JOIN users ON users.id = items.owner_id WHERE users.id = $1 AND items.sold_status = $2 GROUP BY items.id, photo_urls.id, users.id;`,
+        [req.session.user_id, "FALSE"]
       )
       .then((data) => {
         const users = data.rows;
