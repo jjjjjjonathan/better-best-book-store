@@ -9,6 +9,7 @@ module.exports = (db) => {
         const items = data.rows;
         const templateVars = {
           items: items,
+          username:req.session['name'],
         };
         res.render("books/books", templateVars);
       })
@@ -17,7 +18,10 @@ module.exports = (db) => {
       });
   });
   router.get('/search', (req, res) => {
-    res.render('books/search');
+    const templateVars = {
+      username: req.session['name']
+    }
+    res.render('books/search',templateVars);
   });
   return router;
 };

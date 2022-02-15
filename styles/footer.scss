@@ -11,6 +11,7 @@ footer {
     rgb(35, 44, 45) 100%
   );
   top: 0vh;
+
   #social-media {
     display: flex;
     color: white;
@@ -22,9 +23,11 @@ footer {
     font-size: 2em;
     margin: 0 auto;
   }
+
   #social-media .fa-brands:hover {
     color: rgb(67, 82, 86);
   }
+
   p {
     font-size: 20px;
     text-align: center;

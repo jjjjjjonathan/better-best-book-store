@@ -9,7 +9,6 @@
   border: 4px solid;
   border-color: black;
   border-radius: 8px;
-  margin-bottom: 50px;
 }
 
 .container:hover {
@@ -17,9 +16,9 @@
 }
 
 .bookmark {
-  width :20%;
-  height: 100%;
-  align-content: center;
+width :20%;
+height: 100%;
+align-content: center;
 }
 
 .bookmark h3 {
@@ -50,13 +49,6 @@
   justify-self: center;
   margin-left: 40px;
 }
-
-.seller {
-  display: flex;
-  justify-self: center;
-  margin-left: 40px;
-}
-
 .price-tag-box {
   display: flex;
   justify-content: flex-end;
@@ -116,27 +108,10 @@
 	top: 17px;
 }
 
+
 .genre {
   display: flex;
   justify-self: center;
   margin-left: 40px;
 }
 
-.buttons-item {
-  display: flex;
-  flex-direction: row;
-  align-content:space-between;
-  justify-self: center;
-  margin-left: 40px;
-}
-
-.buttons-item button {
-  margin: 10px;
-}
-
-#fav-button i:hover {
-  color:#e4b827;
-}
-#fav-button:focus {
-  color:#e4b827;
-}
