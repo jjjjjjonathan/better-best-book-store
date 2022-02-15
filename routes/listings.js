@@ -24,6 +24,27 @@ module.exports = (db) => {
       });
   });
 
+  router.post("/user/:id", (req, res) => {
+    console.log(req.params.id);
+    const userId = req.session.user_id;
+    if (!userId) {
+      res.redirect("/");
+    }
+    return db
+      .query(`UPDATE items SET sold_status = TRUE;`, [req.params.id])
+      .then((data) => {
+        const users = data.rows;
+        const templateVars = {
+          items: users,
+          username: userId,
+        };
+        res.render("listings/listings", templateVars);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   router.post("/user/:item_id", (req, res) => {
     const userId = req.session.user_id;
     if (!userId) {
@@ -44,7 +65,6 @@ module.exports = (db) => {
         [itemId]
       )
       .then((data) => {
-        console.log(data.rows);
         const users = data.rows[0];
         const templateVars = {
           id: users.item_id,
@@ -65,9 +85,6 @@ module.exports = (db) => {
   router.post("/user/item/edit/:item_id", (req, res) => {
     const itemId = req.params.item_id;
     const itemBody = req.body;
-    console.log("This is item body", itemBody);
-    console.log("This is itemID", itemId);
-    console.log(res.rows);
     return db
       .query(
         `UPDATE items
@@ -98,7 +115,6 @@ module.exports = (db) => {
           sold_status: itemBody.Sold_status,
           Genre: itemBody.Genre,
         };
-        console.log(templateVars);
         res.render(`listings/edit`, templateVars);
       })
       .catch((err) => {
