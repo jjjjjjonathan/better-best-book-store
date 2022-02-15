@@ -55,6 +55,7 @@ const listingsRoutes = require("./routes/listings");
 const itemPreviewRoutes = require("./routes/item_preview");
 const authRoutes = require("./routes/auth");
 
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
@@ -72,10 +73,28 @@ app.use("/auth", authRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  const templateVars = {username: req.session.name}
+  console.log(req.session.name)
+  const templateVars = {username: req.session.username}
   res.render("index", templateVars);
 });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+
+app.post("/:itemId/addfavorite", (req, res) => {
+  let queryString = `
+  INSERT INTO favorites(item_id,user_id)
+  VALUES ($1, $2)
+  RETURNING *;`;
+  let values = [req.params["itemId"],req.session["user_id"]];
+  // ==> Need to write a function helper for checking if the favorite (item / user pair) already exists
+  // in the db and return true or false -- with a db query
+  return db.query(queryString, values)
+  .then(res => res.rows[0])
+  .catch(err => console.log(err));
+});
+
+
+

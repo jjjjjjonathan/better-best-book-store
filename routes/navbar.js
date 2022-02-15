@@ -1,19 +1,13 @@
 
 // const express = require("express");
 // const router = express.Router();
+// // const app = express();
 
-// module.exports = db => {
-// router.get('/', (req, res) => {
-// const userId = req.session['user_id']
-//   return db.query(`SELECT username FROM users WHERE id = $1 ;`, [userId])
-//     .then(data => {
-//       const username = data.rows[0];
+//   router.get('/', (req, res) => {
+//     const username = req.session['name'];
+//     console.log("username: ", username);
 //       const templateVars = { username: username };
-//       res.render('/', templateVars);
-//     })
-//     .catch(error => {
-//       console.log(error);
+//       res.render(templateVars);
 //     });
-// });
-// return router;
-// };
+
+

@@ -20,6 +20,7 @@ module.exports = (db) => {
           sold_status: users.sold_status,
           Genre: users.genre,
           Seller: users.username,
+          itemId: users.id,
         };
         res.render("books/item_preview", templateVars);
       })
