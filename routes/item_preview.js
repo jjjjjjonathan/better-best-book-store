@@ -12,6 +12,7 @@ module.exports = (db) => {
       .then((data) => {
         const users = data.rows[0];
         const templateVars = {
+          id: users.item_id,
           cover: users.photo_url,
           Title: users.title,
           Description: users.description,
