@@ -15,6 +15,7 @@ module.exports = (db) => {
       .then((data) => {
         const users = data.rows;
         const templateVars = {
+          username: req.session.name,
           items: users,
         };
         res.render("listings/listings", templateVars);
@@ -54,6 +55,7 @@ module.exports = (db) => {
           Price: users.price,
           sold_status: users.sold_status,
           Genre: users.genre,
+          username: req.session.name
         };
         res.render(`listings/edit`, templateVars);
       })
@@ -62,6 +64,18 @@ module.exports = (db) => {
       });
   });
 
+  router.get("/new", (req, res) => {
+    res.render("listings/new");
+  });
+
+  router.post("/new", (req, res) => {
+    console.log(req.body);
+    db.query(`INSERT INTO items (owner_id, title, description, price, genre) VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [req.session['user_id'], req.body.title, req.body.description, parseFloat(req.body.price), req.body.genre])
+      .then(data => {
+        console.log(data.rows);
+        res.redirect("../");
+      });
+  });
   router.post("/user/item/edit/:item_id", (req, res) => {
     const itemId = req.params.item_id;
     const itemBody = req.body;
@@ -97,6 +111,7 @@ module.exports = (db) => {
           Price: itemBody.Price,
           sold_status: itemBody.Sold_status,
           Genre: itemBody.Genre,
+          username: req.session.name
         };
         console.log(templateVars);
         res.render(`listings/edit`, templateVars);

@@ -73,8 +73,7 @@ app.use("/auth", authRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  console.log(req.session.name)
-  const templateVars = {username: req.session.username}
+  const templateVars = {username: req.session.name};
   res.render("index", templateVars);
 });
 
