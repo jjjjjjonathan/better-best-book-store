@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 // module.exports = (db) => {
-  router.get("/myfavorites", (req, res) => {
+  router.get("/", (req, res) => {
 let queryString = `SELECT * FROM favorites WHERE user_id = $1;`;
 let values = [req.session['user_id']];
     return db.query(queryString, values)
@@ -14,7 +14,7 @@ let values = [req.session['user_id']];
         // const templateVars = {
         //   items: items,
         // };
-        res.render("books/my_favorites");
+        res.render("books/favorites");
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

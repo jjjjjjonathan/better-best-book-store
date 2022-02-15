@@ -54,6 +54,7 @@ const bookRoutes = require("./routes/books");
 const listingsRoutes = require("./routes/listings");
 const itemPreviewRoutes = require("./routes/item_preview");
 const authRoutes = require("./routes/auth");
+const { redirect } = require("express/lib/response");
 
 
 // Mount all resource routes
@@ -77,11 +78,31 @@ app.get("/", (req, res) => {
   res.render("index", templateVars);
 });
 
+app.get("/favorites", (req, res) => {
+let queryString = `SELECT favorites.id, favorites.item_id, favorites.user_id, photo_url as photo, items.title as title, items.price as price, items.owner_id as seller
+FROM favorites
+JOIN photo_urls ON photo_urls.item_id = favorites.item_id
+JOIN items ON items.id = favorites.item_id
+WHERE favorites.user_id = $1
+ORDER BY favorites.id;`;
+let values = [req.session['user_id']];
+return db.query(queryString, values)
+  .then(data => {
+    const items = data.rows;
+    console.log(items)
+    const templateVars = {
+      items: items,
+    };
+    res.render("books/favorites", templateVars);
+  })
+  .catch(err => console.log(err));
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-
+// add books to favorite from the item page;
 app.post("/:itemId/addfavorite", (req, res) => {
   let queryString = `
   INSERT INTO favorites(item_id,user_id)
@@ -94,6 +115,18 @@ app.post("/:itemId/addfavorite", (req, res) => {
   .then(res => res.rows[0])
   .catch(err => console.log(err));
 });
+
+// to remove a book from the favorites table from the favorites page;
+app.post("/remove-from-fav/:id", (req, res) => {
+  let queryString = `
+  DELETE FROM favorites
+  WHERE id = $1;`;
+  let values = [req.params["id"]];
+  return db.query(queryString, values)
+  .then(() => res.redirect("/favorites"))
+  .catch(err => console.log(err));
+});
+
 
 
 

@@ -23,28 +23,30 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/index.js"></script>
+
+
     <title>Favorite Books</title>
   </head>
   <body>
-    <!-- <% for(const item of items) { %> -->
-    <ul id="container">
-      <li id="book-title"><%= item.title %></li>
-      <img id="cover-image" src="<%= item.photo_url %>" alt="" />
-      <li><%= item.description %></li>
-      <br />
-      <li>Price: $<%= item.price %></li>
-      <br />
-      <li>Genre: <%= item.genre %></li>
+    <% for(const item of items) { %>
+      <ul id="container">
+        <li id="book-title"><%= item.title %></li>
+        <img id="cover-image" src="<%= item.photo %>" alt="" onclick="window.location='/books/item/<%=item.item_id%>';" />
+        <br />
+        <li>Price: $<%= item.price %></li>
 
-    <div class="buttons-item">
-      <form method="POST" action="">
-        <button class="btn btn-outline-secondary" type="submit">Buy now<i class="fa-solid fa-cart-arrow-down"></i></button>
-      </form>
-      <form method="POST" action="">
-        <button class="btn btn-outline-secondary" type="submit">Send a message<i class="fa-regular fa-handshake"></i></button>
-      </form>
-    </div>
-  </ul>
-    <!-- <% } %> -->
+      <div class="buttons-item">
+        <form method="POST" action="">
+          <button class="btn btn-outline-secondary" type="submit">Buy now <i class="fa-solid fa-cart-arrow-down"></i></button>
+        </form>
+        <form method="POST" action="">
+          <button class="btn btn-outline-secondary" type="submit">Send a message <i class="fa-regular fa-handshake"></i></button>
+        </form>
+        <form method="POST" action="/remove-from-fav/<%= item.id %>">
+          <button class="btn btn-outline-secondary" type="submit">Remove from favorites </button>
+        </form>
+      </div>
+    </ul>
+      <% } %>
   </body>
 </html>

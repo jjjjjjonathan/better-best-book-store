@@ -29,7 +29,7 @@
     <% for(const item of items) { %>
     <ul id="container">
       <li id="book-title"><%= item.title %></li>
-      <img id="cover-image" src="<%= item.photo_url %>" alt="" />
+      <img id="cover-image" src="<%= item.photo_url %>" alt="" onclick="window.location='/books/item/<%=item.id%>';"/>
       <li><%= item.description %></li>
       <br />
       <li>Price: $<%= item.price %></li>
