@@ -26,21 +26,18 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/user/:id", (req, res) => {
+  router.post("/user/sold/:id", (req, res) => {
     console.log(req.params.id);
     const userId = req.session.user_id;
     if (!userId) {
       res.redirect("/");
     }
     return db
-      .query(`UPDATE items SET sold_status = TRUE;`, [req.params.id])
-      .then((data) => {
-        const users = data.rows;
-        const templateVars = {
-          items: users,
-          username: userId,
-        };
-        res.render("listings/listings", templateVars);
+      .query(`UPDATE items SET sold_status = TRUE WHERE items.id = $1;`, [
+        req.params.id,
+      ])
+      .then(() => {
+        res.redirect("/listings/user");
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

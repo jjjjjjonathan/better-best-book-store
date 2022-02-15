@@ -14,9 +14,13 @@ const searchQueryGenerator = (queryObj) => {
     whereConditions.push(`items.genre ILIKE $${queryParams.length}`);
   }
   if (queryParams.length > 0) {
-    queryString += ` WHERE ${whereConditions.join(" AND ")}`;
+    queryString += ` WHERE ${whereConditions.join(
+      " AND "
+    )} AND items.sold_status = FALSE;`;
+  } else {
+    queryString += ` WHERE items.sold_status = FALSE;`;
   }
-  queryString += ";";
+
   return [queryString, queryParams];
 };
 
