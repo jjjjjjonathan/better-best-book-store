@@ -56,7 +56,7 @@ module.exports = (db) => {
           Price: users.price,
           sold_status: users.sold_status,
           Genre: users.genre,
-          username: req.session.name
+          username: req.session.name,
         };
         res.render(`listings/edit`, templateVars);
       })
@@ -71,13 +71,21 @@ module.exports = (db) => {
 
   router.post("/new", (req, res) => {
     console.log(req.body);
-    db.query(`INSERT INTO items (owner_id, title, description, price, genre) VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [req.session['user_id'], req.body.title, req.body.description, parseFloat(req.body.price), req.body.genre])
-      .then(data => {
-        console.log(data.rows);
-        res.redirect("../");
-      });
+    db.query(
+      `INSERT INTO items (owner_id, title, description, price, genre) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+      [
+        req.session["user_id"],
+        req.body.title,
+        req.body.description,
+        parseFloat(req.body.price),
+        req.body.genre,
+      ]
+    ).then((data) => {
+      console.log(data.rows);
+      res.redirect("../");
+    });
   });
-  router.post("/user/item/edit/:item_id", (req, res) => {
+  router.post("/user/item/edit/:id", (req, res) => {
     const itemId = req.params.id;
     const itemBody = req.body;
     console.log("This is item body", itemBody);
@@ -85,9 +93,7 @@ module.exports = (db) => {
     console.log(res.rows);
     return db
       .query(
-        `UPDATE items
-         SET title = $1,description = $2, price = $3,
-        genre = $4 WHERE items.id = $5 RETURNING *;
+        `UPDATE items SET title = $1,description = $2, price = $3, genre = $4 WHERE items.id = $5 ;
          `,
         [
           itemBody.Title,
@@ -112,9 +118,9 @@ module.exports = (db) => {
           Price: itemBody.Price,
           sold_status: itemBody.Sold_status,
           Genre: itemBody.Genre,
-          username: req.session.name
+          username: req.session.name,
         };
-        console.log(templateVars);
+        console.log("what is this?", templateVars);
         res.render(`listings/edit`, templateVars);
       })
       .catch((err) => {
