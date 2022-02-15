@@ -4,10 +4,13 @@
 
   </head>
   <body>
-    <% if (messages) { %>
+    <% if (!messages) { %>
+      <p>no messages no one is talking to you</p>
+
+    <% } else { %>
       <ul>
         <% for (const thread of messages) { %>
-          <li><%= thread.message_count %> messages between <%= thread.name1 %> and <%= thread.name2 %>.</li>
+          <li><a href="/conversations/<%= thread.id %>"><%= thread.message_count %> messages between <%= thread.name1 %> and <%= thread.name2 %>.</a></li>
         <% } %>
       </ul>
     <% } %>

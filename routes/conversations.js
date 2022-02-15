@@ -3,7 +3,6 @@ const router = express.Router();
 
 module.exports = db => {
   router.get('/', (req, res) => {
-    // res.render('conversations/conversations');
     const userId = req.session.user_id;
     if (!userId) {
       res.render("index");
@@ -18,13 +17,23 @@ module.exports = db => {
       GROUP BY conversations.id, users_1.name, users_2.name;`)
         .then(data => {
           const messages = data.rows;
-          const templateVars = { messages: messages };
-          res.render('conversations/conversations', templateVars);
+          if (messages.length > 0) {
+            const templateVars = { messages: messages };
+            res.render('conversations/conversations', templateVars);
+          } else {
+            const templateVars = { messages: null };
+            res.render('conversations/conversations', templateVars);
+          }
         })
         .catch(error => {
           console.log(error);
         });
     }
   });
+
+  router.get('/:id', (req, res) => {
+    console.log("yes");
+  });
+
   return router;
 };
