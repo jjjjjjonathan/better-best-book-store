@@ -15,7 +15,6 @@ module.exports = (db) => {
       .then((data) => {
         const users = data.rows;
         const templateVars = {
-          username: req.session.name,
           items: users,
         };
         res.render("listings/listings", templateVars);
@@ -55,7 +54,6 @@ module.exports = (db) => {
           Price: users.price,
           sold_status: users.sold_status,
           Genre: users.genre,
-          username: req.session.name
         };
         res.render(`listings/edit`, templateVars);
       })
@@ -99,7 +97,6 @@ module.exports = (db) => {
           Price: itemBody.Price,
           sold_status: itemBody.Sold_status,
           Genre: itemBody.Genre,
-          username: req.session.name
         };
         console.log(templateVars);
         res.render(`listings/edit`, templateVars);

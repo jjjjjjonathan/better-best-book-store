@@ -1,9 +1,9 @@
 // Function to generate query strings and query parameters to search for books
 // currently only works with title and genre
-const searchQueryGenerator = queryObj => {
+const searchQueryGenerator = (queryObj) => {
   const queryParams = [];
   let queryString = `
-  SELECT items.*, photo_urls.photo_url FROM items JOIN photo_urls ON item_id = items.id`;
+  SELECT items.*, photo_urls.photo_url FROM items JOIN photo_urls ON item_id = items.id;`;
   let whereConditions = [];
   if (queryObj.title) {
     queryParams.push(`%${queryObj.title}%`);
@@ -14,7 +14,7 @@ const searchQueryGenerator = queryObj => {
     whereConditions.push(`items.genre ILIKE $${queryParams.length}`);
   }
   if (queryParams.length > 0) {
-    queryString += ` WHERE ${whereConditions.join(' AND ')}`;
+    queryString += ` WHERE ${whereConditions.join(" AND ")}`;
   }
   queryString += ";";
   return [queryString, queryParams];
