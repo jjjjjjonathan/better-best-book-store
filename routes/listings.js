@@ -93,9 +93,7 @@ module.exports = (db) => {
     console.log(res.rows);
     return db
       .query(
-        `UPDATE items
-         SET title = $1,description = $2, price = $3,
-        genre = $4 WHERE items.id = $5 RETURNING *;
+        `UPDATE items SET title = $1,description = $2, price = $3, genre = $4 WHERE items.id = $5 ;
          `,
         [
           itemBody.Title,
