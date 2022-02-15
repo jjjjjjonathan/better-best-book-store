@@ -10,7 +10,9 @@ module.exports = (db) => {
     } else {
       return db
         .query(
-          `SELECT * , photo_urls FROM items JOIN photo_urls ON item_id = items.id JOIN users ON users.id = items.owner_id WHERE users.id = $1 GROUP BY items.id, photo_urls.id, users.id;`,
+          `SELECT * , photo_urls FROM items JOIN photo_urls ON
+          item_id = items.id JOIN users ON users.id = items.owner_id
+          WHERE users.id = $1 GROUP BY items.id, photo_urls.id, users.id;`,
           [req.session.user_id]
         )
         .then((data) => {
@@ -46,26 +48,18 @@ module.exports = (db) => {
 
   //route for user to delete their items from selling list
   router.post("/user/:item_id", (req, res) => {
+    console.log("post user id 1");
     const userId = req.session.user_id;
     if (!userId) {
+      console.log("userID !");
       res.redirect("/");
     } else {
-      db.query(`DELETE FROM items WHERE items.id = $1 RETURNING *`, [
+      console.log("post/user/itemid", req.params.item_id);
+
+      db.query(`DELETE FROM items WHERE items.id = $1;`, [
         req.params.item_id,
       ]).then(() => {
-        const itemId = req.params.item_id;
-        const templateVars = {
-          id: itemId,
-          username: userId,
-          cover: itemBody.photo_url,
-          Title: itemBody.Title,
-          Description: itemBody.Description,
-          Price: itemBody.Price,
-          sold_status: itemBody.Sold_status,
-          Genre: itemBody.Genre,
-        };
-
-        res.redirect(`/listings/user`, templateVars);
+        res.redirect(`/listings/user`);
       });
     }
   });
