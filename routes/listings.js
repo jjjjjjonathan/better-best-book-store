@@ -2,48 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  //router for to show all items that user sell
   router.get("/user", (req, res) => {
     const userId = req.session.user_id;
     if (!userId) {
       res.redirect("/");
-    } else {
-      return db
-        .query(
-          `SELECT * , photo_urls FROM items JOIN photo_urls ON
-          item_id = items.id JOIN users ON users.id = items.owner_id
-          WHERE users.id = $1 GROUP BY items.id, photo_urls.id, users.id;`,
-          [req.session.user_id]
-        )
-        .then((data) => {
-          const users = data.rows;
-          const templateVars = {
-            items: users,
-            username: req.session.name,
-          };
-          res.render("listings/listings", templateVars);
-        })
-        .catch((err) => {
-          res.status(500).json({ error: err.message });
-        });
     }
-<<<<<<< HEAD
-  });
-
-  //route for user to mark sold the item,
-  // so will not be able to show up in all selling books lists
-  router.post("/user/sold/:item_id", (req, res) => {
-    const userId = req.session.user_id;
-    if (!userId) {
-      res.redirect("/");
-    } else {
-      db.query(`UPDATE items SET sold_status = $1 WHERE items.id = $2`, [
-        true,
-        req.params.item_id,
-      ]).then((data) => {
-        console.log(data.rows);
-        res.redirect(`/listings/user`);
-=======
     return db
       .query(
         `SELECT items.* , photo_urls.photo_url FROM items LEFT JOIN photo_urls ON item_id = items.id JOIN users ON users.id = items.owner_id WHERE users.id = $1 GROUP BY items.id, photo_urls.id, users.id;`,
@@ -60,27 +23,19 @@ module.exports = (db) => {
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
->>>>>>> b2f2258e2e0a84e4a872154aadae5786cf7e2706
       });
-    }
   });
 
-  //route for user to delete their items from selling list
   router.post("/user/:item_id", (req, res) => {
-    console.log("post user id 1");
     const userId = req.session.user_id;
     if (!userId) {
-      console.log("userID !");
       res.redirect("/");
-    } else {
-      console.log("post/user/itemid", req.params.item_id);
-
-      db.query(`DELETE FROM items WHERE items.id = $1;`, [
-        req.params.item_id,
-      ]).then(() => {
-        res.redirect(`/listings/user`);
-      });
     }
+    db.query(`DELETE FROM items WHERE items.id = $1`, [
+      req.params.item_id,
+    ]).then((data) => {
+      res.redirect(`/listings/user`);
+    });
   });
 
   router.get(`/user/item/edit/:id`, (req, res) => {
@@ -101,6 +56,7 @@ module.exports = (db) => {
           Price: users.price,
           sold_status: users.sold_status,
           Genre: users.genre,
+          username: req.session.name,
         };
         res.render(`listings/edit`, templateVars);
       })
@@ -115,13 +71,21 @@ module.exports = (db) => {
 
   router.post("/new", (req, res) => {
     console.log(req.body);
-    db.query(`INSERT INTO items (owner_id, title, description, price, genre) VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [req.session['user_id'], req.body.title, req.body.description, parseFloat(req.body.price), req.body.genre])
-      .then(data => {
-        console.log(data.rows);
-        res.redirect("../");
-      });
+    db.query(
+      `INSERT INTO items (owner_id, title, description, price, genre) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+      [
+        req.session["user_id"],
+        req.body.title,
+        req.body.description,
+        parseFloat(req.body.price),
+        req.body.genre,
+      ]
+    ).then((data) => {
+      console.log(data.rows);
+      res.redirect("../");
+    });
   });
-  router.post("/user/item/edit/:item_id", (req, res) => {
+  router.post("/user/item/edit/:id", (req, res) => {
     const itemId = req.params.id;
     const itemBody = req.body;
     console.log("This is item body", itemBody);
@@ -156,6 +120,7 @@ module.exports = (db) => {
           Price: itemBody.Price,
           sold_status: itemBody.Sold_status,
           Genre: itemBody.Genre,
+          username: req.session.name,
         };
         console.log(templateVars);
         res.render(`listings/edit`, templateVars);
