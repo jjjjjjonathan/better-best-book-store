@@ -7,7 +7,7 @@
     <% if (messages) { %>
       <ul>
         <% for (const thread of messages) { %>
-          <li><%= thread.message_count %> messages between <%= thread.user1 %> and <%= thread.user2 %>.</li>
+          <li><%= thread.message_count %> messages between <%= thread.name1 %> and <%= thread.name2 %>.</li>
         <% } %>
       </ul>
     <% } %>
