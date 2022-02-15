@@ -62,7 +62,6 @@ module.exports = (db) => {
       });
   });
 
-<<<<<<< HEAD
   router.get("/new", (req, res) => {
     res.render("listings/new");
   });
@@ -75,7 +74,6 @@ module.exports = (db) => {
         res.redirect("../");
       });
   });
-=======
   router.post("/user/item/edit/:item_id", (req, res) => {
     const itemId = req.params.item_id;
     const itemBody = req.body;
@@ -120,6 +118,5 @@ module.exports = (db) => {
       });
   });
 
->>>>>>> master
   return router;
 };
