@@ -62,11 +62,15 @@
           >
         </li>
         <li>
-          <a href="" class="listing-button"><button>Mark Sold</button></a>
+          <a href="" class="listing-button"
+            ><form action="user/<%= item.item_id %>" method="POST">
+              <button type="submit">Mark Sold</button>
+            </form></a
+          >
         </li>
         <li>
           <form
-            action="user/<%= item.item_id %>"
+            action="user/sold/<%= item.item_id %>"
             class="listing-button"
             method="POST"
           >
