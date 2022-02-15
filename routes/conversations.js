@@ -39,7 +39,7 @@ module.exports = db => {
     JOIN conversations ON conversations.id = messages.conversation_id
     JOIN users ON messages.sender_id = users.id
     WHERE conversations.id = $1
-    ORDER BY sent_at;`, [req.params.id])
+    ORDER BY sent_at DESC;`, [req.params.id])
       .then(data => {
         const messageThread = data.rows;
         const templateVars = { messageThread, user: req.session['user_id'] };
