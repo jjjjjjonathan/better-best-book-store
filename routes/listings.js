@@ -9,11 +9,12 @@ module.exports = (db) => {
     }
     return db
       .query(
-        `SELECT * , photo_urls FROM items JOIN photo_urls ON item_id = items.id JOIN users ON users.id = items.owner_id WHERE users.id = $1 GROUP BY items.id, photo_urls.id, users.id;`,
+        `SELECT items.* , photo_urls.photo_url FROM items LEFT JOIN photo_urls ON item_id = items.id JOIN users ON users.id = items.owner_id WHERE users.id = $1 GROUP BY items.id, photo_urls.id, users.id;`,
         [req.session.user_id]
       )
       .then((data) => {
         const users = data.rows;
+        console.log(users[1]);
         const templateVars = {
           username: req.session.name,
           items: users,
@@ -37,18 +38,18 @@ module.exports = (db) => {
     });
   });
 
-  router.get(`/user/item/edit/:item_id`, (req, res) => {
-    const itemId = req.params.item_id;
+  router.get(`/user/item/edit/:id`, (req, res) => {
+    const itemId = req.params.id;
     return db
       .query(
-        `SELECT * , photo_urls FROM items JOIN photo_urls ON item_id = items.id WHERE items.id = $1 GROUP BY items.id, photo_urls.id;`,
+        `SELECT items.* , photo_urls.photo_url FROM items LEFT JOIN photo_urls ON item_id = items.id WHERE items.id = $1 GROUP BY items.id, photo_urls.id;`,
         [itemId]
       )
       .then((data) => {
         console.log(data.rows);
         const users = data.rows[0];
         const templateVars = {
-          id: users.item_id,
+          id: users.id,
           cover: users.photo_url,
           Title: users.title,
           Description: users.description,
@@ -77,7 +78,7 @@ module.exports = (db) => {
       });
   });
   router.post("/user/item/edit/:item_id", (req, res) => {
-    const itemId = req.params.item_id;
+    const itemId = req.params.id;
     const itemBody = req.body;
     console.log("This is item body", itemBody);
     console.log("This is itemID", itemId);
