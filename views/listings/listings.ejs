@@ -56,13 +56,17 @@
       <div id="edit-delete">
         <li>
           <a
-            href="/listings/user/item/edit/<%= item.item_id %>"
+            href="/listings/user/item/edit/<%= item.id %>"
             class="listing-button"
             ><button>Edit</button></a
           >
         </li>
         <li>
-          <form action=""><button>Mark Sold</button></form>
+          <a href="" class="listing-button"
+            ><form action="user/<%= item.item_id %>" method="POST">
+              <button type="submit">Mark Sold</button>
+            </form></a
+          >
         </li>
         <li>
           <form
