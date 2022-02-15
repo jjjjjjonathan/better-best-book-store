@@ -11,6 +11,13 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
+  <!-- Bootstrap CSS -->
+    <link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+  crossorigin="anonymous"
+  />
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
@@ -32,6 +39,22 @@
       <li>Price: $<%= Price %></li>
       <br>
       <li>Genre: <%= Genre %></li>
+      <br>
+      <li>Sold by: <%= Seller %></li>
+      <br>
+      <li>
+        <div class="buttons-item">
+          <form method="POST" action="">
+            <button class="btn btn-outline-secondary" type="submit">Buy <i class="fa-solid fa-cart-arrow-down"></i></button>
+          </form>
+          <form method="POST" action="">
+            <button class="btn btn-outline-secondary" type="submit">Make an offer <i class="fa-regular fa-handshake"></i></button>
+          </form>
+          <form method="POST" action="/<%=itemId%>/addfavorite">
+            <button class="btn btn-outline-secondary" id="fav-button" type="submit">Add to favorites <i class="fa-solid fa-heart"></i></button>
+          </form>
+        </div>
+      </li>
     </ul>
 
     <footer><%- include("../partials/_footer") %></footer>

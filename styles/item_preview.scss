@@ -21,3 +21,20 @@
     padding: 50px;
   }
 }
+
+.buttons-item {
+display: flex;
+flex-direction: row;
+align-content:space-between;
+}
+
+.buttons-item button {
+  margin: 10px;
+}
+
+#fav-button i:hover {
+  color:rgb(200, 80, 233)
+}
+#fav-button i:focus {
+  color:rgb(200, 80, 233)
+}
