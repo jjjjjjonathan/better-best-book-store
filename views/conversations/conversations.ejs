@@ -10,7 +10,7 @@
     <% } else { %>
       <ul>
         <% for (const thread of messages) { %>
-          <li><a href="/conversations/<%= thread.id %>"><%= thread.message_count %> messages between <%= thread.name1 %> and <%= thread.name2 %>.</a></li>
+          <li><a href="/conversations/<%= thread.id %>"><%= thread.message_count %> messages between <%= thread.name1 %> and <%= thread.name2 %>. Last message time: <%= thread.last_message_time %></a></li>
         <% } %>
       </ul>
     <% } %>
