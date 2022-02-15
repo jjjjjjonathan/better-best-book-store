@@ -40,8 +40,17 @@ module.exports = db => {
     ORDER BY sent_at;`, [req.params.id])
       .then(data => {
         const messageThread = data.rows;
-        const templateVars = { messageThread };
+        const templateVars = { messageThread, user: req.session['user_id'] };
         res.render('conversations/thread', templateVars);
+      });
+  });
+
+  router.post('/:id', (req, res) => {
+    console.log(req.params, req.body);
+    return db.query(`INSERT INTO messages (sender_id, conversation_id, message_body)
+    VALUES ($1, $2, $3);`, [req.session['user_id'], parseFloat(req.params.id), req.body.message])
+      .then(() => {
+        res.redirect(`/conversations/${req.params.id}`);
       });
   });
 
