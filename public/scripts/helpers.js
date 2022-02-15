@@ -3,7 +3,7 @@
 const searchQueryGenerator = (queryObj) => {
   const queryParams = [];
   let queryString = `
-  SELECT items.*, photo_urls.photo_url FROM items JOIN photo_urls ON item_id = items.id;`;
+  SELECT items.*, photo_urls.photo_url FROM items LEFT JOIN photo_urls ON photo_urls.item_id = items.id`;
   let whereConditions = [];
   if (queryObj.title) {
     queryParams.push(`%${queryObj.title}%`);
