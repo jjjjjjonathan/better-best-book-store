@@ -30,11 +30,11 @@
     <body>
       <%- include("../partials/_navbar") %>
         <% for(const item of items) { %>
-      <div class="container">
+      <div class="container" onclick="window.location='/books/item/<%=item.id%>';">
         <div class="bookmark">
          <h3><%= item.genre %></h3>
         </div>
-        <img class="cover-image" src="<%= item.photo_url %>" alt="" onclick="window.location='/books/item/<%=item.id%>';"/>
+        <img class="cover-image" src="<%= item.photo_url %>" alt="" />
           <div class="desc-box">
             <h1 class="book-title"><%= item.title %></h1>
             <a class="description"><%= item.description %></a>

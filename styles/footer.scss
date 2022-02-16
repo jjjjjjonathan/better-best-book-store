@@ -1,4 +1,6 @@
 footer {
+  display: flex;
+  justify-self: flex-end;
   position: relative;
   background: rgb(67, 82, 86);
   background: linear-gradient(
@@ -10,7 +12,8 @@ footer {
     rgb(30, 36, 37) 74%,
     rgb(35, 44, 45) 100%
   );
-  top: 0vh;
+  // top: 0vh;
+  height: 220px;
 
   #social-media {
     display: flex;
