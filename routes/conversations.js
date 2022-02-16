@@ -16,7 +16,7 @@ module.exports = db => {
       WHERE conversations.user1_id = $1
       OR conversations.user2_id = $1
       GROUP BY conversations.id, users_1.username, users_2.username
-      ORDER BY last_message_time;`, [userId])
+      ORDER BY last_message_time DESC;`, [userId])
         .then(data => {
           const messages = data.rows;
           if (messages.length > 0) {
@@ -34,6 +34,20 @@ module.exports = db => {
           console.log(error);
         });
     }
+  });
+
+  router.post('/', (req, res) => {
+    console.log(req.body);
+    return db.query(`INSERT INTO conversations (user1_id, user2_id)
+    VALUES (${req.session.user_id}, ${req.body.owner_id}) RETURNING id;`)
+      .then(data => {
+        console.log(data.rows[0], req.body);
+        return db.query(`INSERT INTO messages (item_id, sender_id, conversation_id, message_body)
+        VALUES (${req.body.item_id}, ${req.session.user_id}, ${data.rows[0].id}, $1)`, [req.body.message])
+          .then(() => {
+            res.redirect('/conversations');
+          });
+      });
   });
 
   router.get('/:id', (req, res) => {
