@@ -81,7 +81,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/favorites", (req, res) => {
-let queryString = `SELECT favorites.id, favorites.item_id, favorites.user_id, photo_url as photo, items.title as title, items.price as price, items.owner_id as seller
+let queryString = `SELECT favorites.id, favorites.item_id, favorites.user_id, photo_url as photo, items.title as title, items.price as price, items.owner_id as seller, items.genre as genre
 FROM favorites
 JOIN photo_urls ON photo_urls.item_id = favorites.item_id
 JOIN items ON items.id = favorites.item_id
