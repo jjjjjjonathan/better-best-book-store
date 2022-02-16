@@ -83,7 +83,9 @@ module.exports = (db) => {
   });
 
   router.get("/new", (req, res) => {
-    res.render("listings/new");
+
+    const templateVars= { username: req.session['name']}
+    res.render("listings/new", templateVars);
   });
 
   router.post("/new", (req, res) => {

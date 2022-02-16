@@ -13,6 +13,7 @@ module.exports = (db) => {
         const items = data.rows;
         const templateVars = {
           items: items,
+          username:req.session['name'],
         };
         res.render("books/books", templateVars);
       })
@@ -20,8 +21,11 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.get("/search", (req, res) => {
-    res.render("books/search");
+  router.get('/search', (req, res) => {
+    const templateVars = {
+      username: req.session['name']
+    }
+    res.render('books/search',templateVars);
   });
   return router;
 };
