@@ -14,7 +14,7 @@ module.exports = (db) => {
       )
       .then((data) => {
         const users = data.rows;
-        console.log(users[1]);
+        console.log("this is user", users);
         const templateVars = {
           username: req.session.name,
           items: users,
@@ -97,14 +97,23 @@ module.exports = (db) => {
         parseFloat(req.body.price),
         req.body.genre,
       ]
-    ).then((data) => {
-      console.log(data.rows);
-      res.redirect("../");
-    });
+    )
+      .then((item) => {
+        console.log("this is item:", item);
+        db.query(`INSERT INTO photo_urls (item_id,photo_url) VALUES ($1,$2);`, [
+          item.rows[0].id,
+          "",
+        ]);
+      })
+      .then(() => {
+        res.redirect("../");
+      });
   });
+
   router.post("/user/item/edit/:id", (req, res) => {
     const itemId = req.params.id;
     const itemBody = req.body;
+    console.log("item body:", itemBody);
     return db
       .query(
         `UPDATE items SET title = $1,description = $2, price = $3, genre = $4 WHERE items.id = $5 ;
@@ -134,6 +143,7 @@ module.exports = (db) => {
           Genre: itemBody.Genre,
           username: req.session.name,
         };
+        console.log("templateVars:", templateVars);
         res.render(`listings/edit`, templateVars);
       })
       .catch((err) => {
