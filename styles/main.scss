@@ -10,18 +10,27 @@ main {
 }
 
 .main-box {
-  width: 100%;
+  width: auto;
   display: flex;
-  // height: 300px;
+  height: 450px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-radius: 8px;
+  background-image: url("https://cdn.theatlantic.com/thumbor/ydPXKj5crBE1zEitukJNhgXix38=/0x0:2885x1623/1952x1098/media/img/mt/2019/10/Tang_Atlantic_BookTheFuture/original.jpg");
+  background-size: 1000px;
+  background-position: center;
+}
+
+.image-main-box {
+width: auto;
+height: 600px;
 }
 
 .title {
   color: black;
   font-size: 35px;
-  font-family: 'Cinzel', serif;
+  margin-bottom: 250px;
 }
 
 .central-box {
@@ -30,6 +39,7 @@ main {
   display: flex;
   flex-direction: row;
   justify-content:space-around;
+  margin-top: 20px;
 }
 
 .buy-box {
@@ -40,7 +50,6 @@ main {
   background-image: url("https://us.123rf.com/450wm/jennyonthemoon/jennyonthemoon2002/jennyonthemoon200200027/142990455-des-gens-mignons-qui-%C3%A9tudient-et-lisent-sur-des-livres-g%C3%A9ants-l-illustration-vectorielle-dans-un-sty.jpg?ver=6");
   background-position: center;
   cursor: pointer;
-  font-family: 'Cinzel', serif;
   padding-left: 10px;
 }
 
@@ -57,7 +66,6 @@ main {
   background-image: url("https://media.istockphoto.com/vectors/faceless-man-and-a-woman-are-holding-stacks-of-books-education-and-vector-id1226038968?k=20&m=1226038968&s=170667a&w=0&h=MKhoeWG4q3yGgrpESO60gYCeo-cHcJkjnfsZIsOvRqU=");
   background-position: center;
   cursor: pointer;
-  font-family: 'Cinzel', serif;
   padding-left: 10px;
 }
 
@@ -75,10 +83,10 @@ main {
   justify-content: center;
   border-radius: 8px;
   margin-top: 40px;
-  background-image: url("https://media.istockphoto.com/vectors/hands-with-books-people-holding-and-reading-book-and-magazine-public-vector-id1185264474");
+  background-image: url("https://cdn4.vectorstock.com/i/1000x1000/13/93/man-and-woman-characters-reading-books-vector-23121393.jpg");
   background-position: center;
+  background-size: 100%;
   cursor: pointer;
-  font-family: 'Cinzel', serif;
   padding-left: 10px;
 }
 

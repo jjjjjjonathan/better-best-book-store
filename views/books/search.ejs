@@ -29,7 +29,7 @@
     <form action="/books" method="GET" id="advanced-search-form" class="advanced-search-container">
       <h1>What are you looking for ?</h1>
       <div class="advanced-search-form">
-        <label for="title">Keywords in title <i class="fa-solid fa-key"></i></label>
+        <label for="title">Keywords or title <i class="fa-solid fa-key"></i></label>
         <input class="input-box" type="text" name="title">
       </div>
       <div class="advanced-search-form">
@@ -37,7 +37,7 @@
         <input class="input-box" type="text" maxlength="13" pattern="[0-9]" placeholder="Enter a 13-digit ISBN-13 number" name="isbn" oninvalid="alert('numbers only')">
       </div>
       <div class="advanced-search-form">
-        <label for="genre">Genre <i class="fa-solid fa-book"></i></label>
+        <label for="genre">Genre <i class="fa-solid fa-masks-theater"></i></label>
         <input class="input-box" type="text" name="genre">
       </div>
         <label for="min-price">Minimum price <i class="fa-solid fa-dollar-sign"></i></label>
@@ -50,25 +50,13 @@
         <input class="input-box" type="text" name="location" placeholder="Enter a city">
       </div>
       <div class="advanced-search-button">
-        <button type="submit">Search</button>
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
       </div>
     </form>
     <footer><%- include("../partials/_footer") %></footer>
       <!-- Bootstrap plugin JS -->
-      <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    </body>
 </html>
