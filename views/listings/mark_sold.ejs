@@ -48,14 +48,16 @@
   </head>
   <body>
     <%- include("../partials/_navbar") %> <% for(const item of items) { %>
-    <div
-      class="container"
-      onclick="window.location='/books/item/<%=item.id%>';"
-    >
+    <div class="container">
       <div class="bookmark">
         <h3><%= item.genre %></h3>
       </div>
-      <img class="cover-image" src="<%= item.photo_url %>" alt="" />
+      <img
+        class="cover-image"
+        src="<%= item.photo_url %>"
+        alt=""
+        onclick="window.location='/books/item/<%=item.id%>';"
+      />
       <div class="desc-box">
         <h1 class="book-title"><%= item.title %></h1>
         <a class="description"><%= item.description %></a>
@@ -64,37 +66,23 @@
           <p class="card-price">$<%= item.price %></p>
         </div>
         <br />
-        <div class="buttons-item">
-          <a
-            class="listing-button"
-            href="/listings/user/item/edit/<%= item.id %>"
-            ><button class="btn btn-outline-secondary">
-              Edit <i class="fa-solid fa-pen-to-square"></i></button
-          ></a>
-          <a href="" class="listing-button">
-            <form action="user/sold/<%= item.id %>" method="POST">
-              <button class="btn btn-outline-secondary">
-                Mark Sold <i class="fa-solid fa-hand-holding-dollar"></i>
-              </button></form
-          ></a>
-
-          <form
-            action="user/<%= item.id %>"
-            class="listing-button"
-            method="POST"
-          >
-            <button
-              type="submit"
-              id="deleteItem"
-              class="btn btn-outline-secondary"
-            >
-              Delete <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </form>
-        </div>
       </div>
     </div>
+
     <% } %>
+    <div id="total-sold">
+      <h3>Total Sold Item : <%= items.length %></h3>
+      <a href="/listings/user"
+        ><button
+          class="btn btn-outline-secondary"
+          type="button"
+          id="submit-edit"
+        >
+          Back
+        </button></a
+      >
+    </div>
+
     <footer><%- include("../partials/_footer") %></footer>
     <!-- Bootstrap plugin JS -->
     <script

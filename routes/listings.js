@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
+  //list of all items that user sell route
   router.get("/user", (req, res) => {
     const userId = req.session.user_id;
     if (!userId) {
@@ -26,6 +27,35 @@ module.exports = (db) => {
       });
   });
 
+  //list of all user sold items route
+  router.get("/user/sold", (req, res) => {
+    const userId = req.session.user_id;
+    if (!userId) {
+      res.redirect("/");
+    }
+    return db
+      .query(
+        `SELECT items.* , photo_urls.photo_url
+        FROM items LEFT JOIN photo_urls ON item_id = items.id
+        JOIN users ON users.id = items.owner_id
+        WHERE users.id = $1 AND items.sold_status = $2
+        GROUP BY items.id, photo_urls.id, users.id;`,
+        [req.session.user_id, "TRUE"]
+      )
+      .then((data) => {
+        const users = data.rows;
+        console.log("this is user", users);
+        const templateVars = {
+          username: req.session.name,
+          items: users,
+        };
+        res.render("listings/mark_sold", templateVars);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   router.post("/user/sold/:id", (req, res) => {
     console.log(req.params.id);
     const userId = req.session.user_id;
@@ -44,6 +74,7 @@ module.exports = (db) => {
       });
   });
 
+  //route for delete item from the user sell items list and from database
   router.post("/user/:item_id", (req, res) => {
     console.log("this is req.params.item_id", req.params);
     const userId = req.session.user_id;
@@ -57,8 +88,13 @@ module.exports = (db) => {
       });
   });
 
+  //edit item from user selling lists route
   router.get(`/user/item/edit/:id`, (req, res) => {
     const itemId = req.params.id;
+    const userId = req.session.user_id;
+    if (!userId) {
+      res.redirect("/");
+    }
     return db
       .query(
         `SELECT items.* , photo_urls.photo_url FROM items LEFT JOIN photo_urls ON item_id = items.id WHERE items.id = $1 GROUP BY items.id, photo_urls.id;`,
@@ -83,39 +119,13 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/new", (req, res) => {
-    const templateVars = { username: req.session["name"] };
-    res.render("listings/new", templateVars);
-  });
-
-  router.post("/new", (req, res) => {
-    console.log(req.body);
-    db.query(
-      `INSERT INTO items (owner_id, title, description, price, genre) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
-      [
-        req.session["user_id"],
-        req.body.title,
-        req.body.description,
-        parseFloat(req.body.price),
-        req.body.genre,
-      ]
-    )
-      .then((item) => {
-        console.log("this is item:", item);
-        db.query(`INSERT INTO photo_urls (item_id,photo_url) VALUES ($1,$2);`, [
-          item.rows[0].id,
-          "",
-        ]);
-      })
-      .then(() => {
-        res.redirect("../");
-      });
-  });
-
   router.post("/user/item/edit/:id", (req, res) => {
     const itemId = req.params.id;
     const itemBody = req.body;
-    console.log("item body:", itemBody);
+    const userId = req.session.user_id;
+    if (!userId) {
+      res.redirect("/");
+    }
     return db
       .query(
         `UPDATE items SET title = $1,description = $2, price = $3, genre = $4 WHERE items.id = $5 ;
@@ -150,6 +160,43 @@ module.exports = (db) => {
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
+      });
+  });
+
+  //create new items to sell routes
+  router.get("/new", (req, res) => {
+    const userId = req.session.user_id;
+    if (!userId) {
+      res.redirect("/");
+    }
+    const templateVars = { username: req.session["name"] };
+    res.render("listings/new", templateVars);
+  });
+
+  router.post("/new", (req, res) => {
+    const userId = req.session.user_id;
+    if (!userId) {
+      res.redirect("/");
+    }
+    db.query(
+      `INSERT INTO items (owner_id, title, description, price, genre) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+      [
+        req.session["user_id"],
+        req.body.title,
+        req.body.description,
+        parseFloat(req.body.price),
+        req.body.genre,
+      ]
+    )
+      .then((item) => {
+        console.log("this is item:", item);
+        db.query(`INSERT INTO photo_urls (item_id,photo_url) VALUES ($1,$2);`, [
+          item.rows[0].id,
+          "",
+        ]);
+      })
+      .then(() => {
+        res.redirect("../");
       });
   });
 
