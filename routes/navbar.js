@@ -1,4 +1,3 @@
-
 // const express = require("express");
 // const router = express.Router();
 // // const app = express();
@@ -9,5 +8,3 @@
 //       const templateVars = { username: username };
 //       res.render(templateVars);
 //     });
-
-

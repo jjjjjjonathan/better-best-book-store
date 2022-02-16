@@ -1,10 +1,14 @@
 const express = require("express");
-const { searchQueryGenerator } = require('../public/scripts/helpers');
+const { searchQueryGenerator } = require("../public/scripts/helpers");
 const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    return db.query(searchQueryGenerator(req.query)[0], searchQueryGenerator(req.query)[1])
+    return db
+      .query(
+        searchQueryGenerator(req.query)[0],
+        searchQueryGenerator(req.query)[1]
+      )
       .then((data) => {
         const items = data.rows;
         const templateVars = {
