@@ -16,10 +16,9 @@ module.exports = db => {
       WHERE conversations.user1_id = $1
       OR conversations.user2_id = $1
       GROUP BY conversations.id, users_1.username, users_2.username
-      ORDER BY conversations.last_message_time;`, [userId])
+      ORDER BY last_message_time;`, [userId])
         .then(data => {
           const messages = data.rows;
-          console.log(messages[0]);
           if (messages.length > 0) {
             for (const message of messages) {
               message['last_message_time'] = timeago.format(message['last_message_time']);
@@ -50,8 +49,6 @@ module.exports = db => {
       .then(data => {
         const messageThread = data.rows.reverse();
         const user = req.session.user_id;
-        console.log(user);
-        console.log(messageThread[0]);
         if (user === messageThread[0].id1 || user === messageThread[0].id2) {
           for (const message of messageThread) {
             message['sent_at'] = timeago.format(message['sent_at']);
@@ -65,12 +62,8 @@ module.exports = db => {
   });
 
   router.post('/:id', (req, res) => {
-    console.log(req.params, req.body);
     return db.query(`INSERT INTO messages (sender_id, conversation_id, message_body)
     VALUES ($1, $2, $3);`, [req.session['user_id'], parseFloat(req.params.id), req.body.message])
-      .then(() => {
-        db.query(`UPDATE conversations SET last_message_time = CURRENT_TIMESTAMP() WHERE id = ${parseFloat(req.params.id)};`);
-      })
       .then(() => {
         res.redirect(`/conversations/${req.params.id}`);
       });

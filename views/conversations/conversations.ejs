@@ -8,11 +8,20 @@
       <p>no messages no one is talking to you</p>
 
     <% } else { %>
-      <ul>
+      <section id="inbox">
+        <p>------------</p>
         <% for (const thread of messages) { %>
-          <li><a href="/conversations/<%= thread.id %>"><%= thread.message_count %> messages between <%= thread.name1 %> and <%= thread.name2 %>. Last message time: <%= thread.last_message_time %></a></li>
+          <a href="/conversations/<%= thread.id %>">
+            <div class="thread-body">
+              <h4><%= thread.message_count %> messages between <%= thread.name1 %> and <%= thread.name2 %></h4>
+            </div>
+            <div class="thread-footer">
+              <h5>Last message was sent <%= thread.last_message_time %></h5>
+            </div>
+            <p>------------</p>
+          </a>
         <% } %>
-      </ul>
+      </section>
     <% } %>
   </body>
 </html>
