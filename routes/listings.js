@@ -45,15 +45,16 @@ module.exports = (db) => {
   });
 
   router.post("/user/:item_id", (req, res) => {
+    console.log("this is req.params.item_id", req.params);
     const userId = req.session.user_id;
     if (!userId) {
       res.redirect("/");
     }
-    db.query(`DELETE FROM items WHERE items.id = $1`, [
-      req.params.item_id,
-    ]).then((data) => {
-      res.redirect(`/listings/user`);
-    });
+    return db
+      .query(`DELETE FROM items WHERE items.id = $1`, [req.params.item_id])
+      .then((data) => {
+        res.redirect(`/listings/user`);
+      });
   });
 
   router.get(`/user/item/edit/:id`, (req, res) => {
@@ -64,15 +65,15 @@ module.exports = (db) => {
         [itemId]
       )
       .then((data) => {
-        const users = data.rows[0];
+        const items = data.rows[0];
         const templateVars = {
-          id: users.id,
-          cover: users.photo_url,
-          Title: users.title,
-          Description: users.description,
-          Price: users.price,
-          sold_status: users.sold_status,
-          Genre: users.genre,
+          id: items.id,
+          cover: items.photo_url,
+          Title: items.title,
+          Description: items.description,
+          Price: items.price,
+          sold_status: items.sold_status,
+          Genre: items.genre,
           username: req.session.name,
         };
         res.render(`listings/edit`, templateVars);
@@ -83,8 +84,7 @@ module.exports = (db) => {
   });
 
   router.get("/new", (req, res) => {
-
-    const templateVars= { username: req.session['name']}
+    const templateVars = { username: req.session["name"] };
     res.render("listings/new", templateVars);
   });
 
