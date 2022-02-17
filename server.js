@@ -113,31 +113,9 @@ app.post("/:itemId/addfavorite", (req, res) => {
   INSERT INTO favorites(item_id,user_id)
   VALUES ($1, $2)
   RETURNING *;`;
-<<<<<<< Updated upstream
   let values = [req.params["itemId"],req.session["user_id"]];
       return db.query(queryString, values)
       .then(() => {res.redirect(`/books/item/${values[0]}`)});
-=======
-  let values = [req.params["itemId"], req.session["user_id"]];
-
-  let checkQueryString = `
-    SELECT * FROM favorites
-    WHERE item_id = $1 AND user_id =$2;`;
-  return db
-    .query(checkQueryString, values)
-    .then((res) => {
-      console.log(res.fields.length);
-      if (res.fields.length != 0) {
-        //  alert("You already added this item to your favorites"); // Problem to throw alert!
-      } else {
-        return db
-          .query(queryString, values)
-          .then((res) => res.redirect(`/books/item/${req.params["itemId"]}`))
-          .catch((err) => console.log(err));
-      }
-    })
-    .catch((err) => console.log(err));
->>>>>>> Stashed changes
 });
 
 // to remove a book from the favorites table from the favorites page;
