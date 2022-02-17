@@ -8,15 +8,21 @@ module.exports = db => {
     if (!userId) {
       res.render("index");
     } else {
-      return db.query(`SELECT conversations.id, count(messages.*) as message_count, users_1.username as name1, users_2.username as name2, MAX(messages.sent_at) as last_message_time
-      FROM messages
-      JOIN conversations ON messages.conversation_id = conversations.id
+      return db.query(`SELECT conversations.id, MAX(users_1.username) as name1, MAX(users_2.username) as name2, MAX(messages.sent_at) as last_message_time, MAX(users_3.username) as last_sender
+      FROM conversations
+      JOIN messages ON messages.conversation_id = conversations.id
       JOIN users AS users_1 ON conversations.user1_id = users_1.id
       JOIN users AS users_2 ON conversations.user2_id = users_2.id
-      WHERE conversations.user1_id = $1
-      OR conversations.user2_id = $1
-      GROUP BY conversations.id, users_1.username, users_2.username
-      ORDER BY last_message_time DESC;`, [userId])
+      JOIN users AS users_3 ON messages.sender_id = users_3.id
+      WHERE (conversations.user1_id = $1
+      OR conversations.user2_id = $1)
+      AND messages.id IN (
+        SELECT MAX(messages.id)
+        FROM messages
+        JOIN conversations ON conversations.id = messages.conversation_id
+        GROUP BY conversations.id
+      )
+      GROUP BY conversations.id;`, [userId])
         .then(data => {
           const messages = data.rows;
           if (messages.length > 0) {
