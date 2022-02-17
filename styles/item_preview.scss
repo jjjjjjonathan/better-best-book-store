@@ -1,7 +1,7 @@
 .container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   margin-left: 50px;
   margin-right: 50px;
   margin-top: 70px;
@@ -10,6 +10,8 @@
   border-color: black;
   border-radius: 8px;
   margin-bottom: 50px;
+  width: 100%;
+  align-items: center;
 }
 
 .container:hover {
@@ -17,33 +19,40 @@
 }
 
 .bookmark {
-  width :20%;
+  transform: rotate(90deg);
+  width :auto;
   height: 100%;
   align-content: center;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 .bookmark h3 {
-  transform: rotate(270deg);
+  transform: rotate(-90deg);
   background-image: url("https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/70054/yellow-bookmark-clipart-md.png");
   width:auto;
   height: auto;
 }
 
-.cover-image {
-  display: flex;
-  justify-self: center;
-  width: 30%;
+
+.cover-image{
+display: flex;
+flex-direction: column;
+align-items: center;
+ img {
+max-width: 50%
+ }
 }
 
 .desc-box {
-  width: 40%;
-}
 
-.book-title {
-  display: flex;
-  justify-self: center;
-  margin-left: 40px;
-}
+  }
+
+  .book-title {
+    margin-left: 20%;
+    margin-right: 20%;
+  }
 
 .description {
   display: flex;
@@ -61,7 +70,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  padding-left: 400px;
+  padding-left: 50%;
 }
 
 .card-price {
@@ -140,3 +149,26 @@
 #fav-button:focus {
   color:#e4b827;
 }
+
+@media only screen and (min-width: 990px) {
+  .container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .bookmark{
+    transform: rotate(0deg);
+  }
+  .cover-image img {
+    max-width: 70%
+    }
+  .desc-box {
+    width: 45%;
+    flex-direction: row;
+  }
+
+  .price-tag-box {
+    padding-left: auto;
+  }
+}
+

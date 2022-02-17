@@ -4,6 +4,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+    console.log(req.query);
     return db
       .query(
         searchQueryGenerator(req.query)[0],
@@ -24,8 +25,8 @@ module.exports = (db) => {
   router.get('/search', (req, res) => {
     const templateVars = {
       username: req.session['name']
-    }
-    res.render('books/search',templateVars);
+    };
+    res.render('books/search', templateVars);
   });
   return router;
 };

@@ -16,7 +16,7 @@
 }
 
 .bookmark {
-width :20%;
+width :auto;
 height: 100%;
 align-content: center;
 }
@@ -115,3 +115,25 @@ align-content: center;
   margin-left: 40px;
 }
 
+
+@media only screen and (max-width: 990px) {
+  .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .bookmark{
+    transform: rotate(90deg);
+  }
+
+  .desc-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .price-tag-box {
+    padding-left: 50%;
+  }
+}

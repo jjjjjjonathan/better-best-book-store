@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
   <link rel="stylesheet" href="/styles/item_preview.css" type="text/css" />
   <link rel="stylesheet" href="/styles/nav_bar.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/body.css" type="text/css" />
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
@@ -36,8 +37,10 @@
         <div class="bookmark">
          <h3><%= Genre %></h3>
         </div>
-        <img id="cover-image" src="<%= cover %>" alt=""/>
-          <div class="desc-box">
+        <div class="cover-image">
+        <img src="<%= cover %>" alt=""/>
+        </div>
+        <div class="desc-box">
             <h1 class="book-title"><%= Title %></h1>
             <a class="description"><%= Description %></a>
             <br />
@@ -81,9 +84,15 @@
                   </div>
                 </div>
               <!-- </form> -->
-              <form method="POST" action="/<%=itemId%>/addfavorite">
-                <button class="btn btn-outline-secondary" id="fav-button" type="submit">Add to favorites <i class="fa-solid fa-heart"></i></button>
-              </form>
+              <% if (favoriteId != undefined) { %>
+                <form method="POST" action="../remove-from-fav/<%= favoriteId%>">
+                  <button class="btn btn-outline-secondary" id="unfav-button" type="submit">Remove from favorites <br /><i class="fa-solid fa-heart-crack"></i></button>
+                </form>
+              <% } else { %>
+                <form method="POST" action="/<%=itemId%>/addfavorite">
+                  <button class="btn btn-outline-secondary" id="fav-button" type="submit">Add to favorites <i class="fa-solid fa-heart"></i></button>
+                </form>
+                <% } %>
             </div>
           </div>
       </div>

@@ -17,7 +17,7 @@
 }
 
 .bookmark {
-  width :10%;
+  width :auto;
   height: 100%;
   align-content: center;
 }
@@ -30,6 +30,9 @@
 }
 
 .old-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 45%;
   align-content: center;
 }
@@ -148,3 +151,27 @@ margin-right: auto;
 }
 
 
+
+@media only screen and (max-width: 990px) {
+  .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .bookmark{
+    transform: rotate(90deg);
+  }
+  .book-title {
+    font-size:25px;
+  }
+  .desc-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .price-tag-box {
+    padding-left: 50%;
+  }
+}

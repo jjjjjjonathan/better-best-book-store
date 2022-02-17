@@ -1,5 +1,6 @@
 footer {
   display: flex;
+  flex-direction: column;
   justify-self: flex-end;
   position: relative;
   background: rgb(67, 82, 86);
@@ -14,6 +15,7 @@ footer {
   );
   // top: 0vh;
   height: 220px;
+  bottom:0px;
 
   #social-media {
     display: flex;

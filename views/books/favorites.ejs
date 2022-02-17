@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
     <link rel="stylesheet" href="/styles/favorites.css" type="text/css" />
     <link rel="stylesheet" href="/styles/nav_bar.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/body.css" type="text/css" />
 
 
     <!-- Bootstrap CSS -->
@@ -33,12 +34,14 @@
     <body>
       <%- include("../partials/_navbar") %>
       <% for(const item of items) { %>
-      <div class="container" onclick="window.location='/books/item/<%=item.item_id%>';">
+      <div class="container">
         <div class="bookmark">
          <h3><%= item.genre %></h3>
         </div>
-        <img id="cover-image" src="<%= item.photo %>" alt="" onclick="window.location='/books/item/<%=item.item_id%>';" />
-          <div class="desc-box">
+        <div class="cover-image">
+        <img src="<%= item.photo %>" alt="" onclick="window.location='/books/item/<%=item.item_id%>';" />
+        </div>
+        <div class="desc-box">
             <h1 class="book-title"><%= item.title %></h1>
             <a class="description"><%= item.description %></a>
             <br />
@@ -50,11 +53,40 @@
               <form method="POST" action="">
                 <button class="btn btn-outline-secondary" type="submit">Buy now <br /><i class="fa-solid fa-cart-arrow-down"></i></button>
               </form>
-              <form method="POST" action="">
+              <!-- <form method="POST" action="">
                 <button class="btn btn-outline-secondary" type="submit">Send a message <br /><i class="fa-regular fa-handshake"></i></button>
+              </form> -->
+
+              <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Make an offer <i class="fa-regular fa-handshake"></i></button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send a message to the seller</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form action="/conversations" method="POST" id="create-message">
+                  <div class="modal-body">
+                    <input type="hidden" value="<%= item.seller %>" name="owner_id">
+                    <input type="hidden" value="<%= item.item_id %>" name="item_id">
+                    <input name="message" type="text" placeholder="Write to seller"></input>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close <i class="fa-solid fa-xmark"></i></button>
+                    <button type="submit" class="btn btn-outline-secondary">Send <i class="fa-solid fa-envelope"></i></button>
+                  </div>
+                </div>
               </form>
-              <form method="POST" action="/remove-from-fav/<%= item.id %>">
-                <button class="btn btn-outline-secondary" type="submit">Remove from favorites <br /><i class="fa-solid fa-heart-crack"></i></button>
+              </div>
+            </div>
+
+
+              <form method="POST" action="books/remove-from-fav/<%= item.id %>">
+                <button class="btn btn-outline-secondary" id ="unfavorite-button" type="submit">Remove from favorites <br /><i class="fa-solid fa-heart-crack"></i></button>
               </form>
             </div>
           </div>

@@ -10,7 +10,7 @@ const cookieSession = require("cookie-session");
 const morgan = require("morgan");
 
 // PG database client/connection setup
-const { Pool } = require("pg");
+const { Pool, Query } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
@@ -58,6 +58,7 @@ const { redirect } = require("express/lib/response");
 const conversationRoutes = require("./routes/conversations");
 const mainRoutes = require("./public/scripts/index");
 
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
@@ -82,23 +83,23 @@ app.use("/", mainRoutes(db));
 // });
 
 app.get("/favorites", (req, res) => {
-  let queryString = `SELECT favorites.id, favorites.item_id, favorites.user_id, photo_url as photo, items.title as title, items.price as price, items.owner_id as seller
+let queryString = `SELECT favorites.id, favorites.item_id, favorites.user_id, photo_url as photo, items.title as title, items.price as price, items.owner_id as seller, items.genre as genre
 FROM favorites
 JOIN photo_urls ON photo_urls.item_id = favorites.item_id
 JOIN items ON items.id = favorites.item_id
 WHERE favorites.user_id = $1
 ORDER BY favorites.id;`;
-  let values = [req.session["user_id"]];
-  return db
-    .query(queryString, values)
-    .then((data) => {
-      const items = data.rows;
-      console.log(items);
-      const templateVars = {
-        items: items,
-        username: req.session["name"],
-      };
-      res.render("books/favorites", templateVars);
+let values = [req.session["user_id"]];
+
+return db
+  .query(queryString, values)
+  .then((data) => {
+    const items = data.rows;
+    const templateVars = {
+      items: items,
+      username: req.session["name"],
+    };
+    res.render("books/favorites", templateVars);
     })
     .catch((err) => console.log(err));
 });
@@ -107,29 +108,30 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
+
 // add books to favorite from the item page;
 app.post("/:itemId/addfavorite", (req, res) => {
   let queryString = `
   INSERT INTO favorites(item_id,user_id)
   VALUES ($1, $2)
   RETURNING *;`;
-  let values = [req.params["itemId"], req.session["user_id"]];
-  // ==> Need to write a function helper for checking if the favorite (item / user pair) already exists
-  // in the db and return true or false -- with a db query
-  return db
-    .query(queryString, values)
-    .then((res) => res.rows[0])
-    .catch((err) => console.log(err));
+  let values = [req.params["itemId"],req.session["user_id"]];
+      return db.query(queryString, values)
+      .then(() => {res.redirect(`/books/item/${values[0]}`)});
 });
 
+
 // to remove a book from the favorites table from the favorites page;
-app.post("/remove-from-fav/:id", (req, res) => {
+app.post("/books/remove-from-fav/:id", (req, res) => {
+  console.log("item id:",req.params["id"])
   let queryString = `
   DELETE FROM favorites
   WHERE id = $1;`;
   let values = [req.params["id"]];
+  console.log(req.params)
+
   return db
     .query(queryString, values)
-    .then(() => res.redirect("/favorites"))
-    .catch((err) => console.log(err));
+    .then(() => {res.redirect(`/favorites`)});
+
 });
