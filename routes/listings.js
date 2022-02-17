@@ -44,7 +44,6 @@ module.exports = (db) => {
       )
       .then((data) => {
         const users = data.rows;
-        console.log("this is user", users);
         const templateVars = {
           username: req.session.name,
           items: users,

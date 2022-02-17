@@ -56,7 +56,7 @@ const itemPreviewRoutes = require("./routes/item_preview");
 const authRoutes = require("./routes/auth");
 const { redirect } = require("express/lib/response");
 const conversationRoutes = require("./routes/conversations");
-
+const mainRoutes = require("./public/scripts/index");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -68,6 +68,7 @@ app.use("/books", bookRoutes(db));
 app.use("/listings", listingsRoutes(db));
 app.use("/auth", authRoutes(db));
 app.use("/conversations", conversationRoutes(db));
+app.use("/", mainRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
 
@@ -75,6 +76,7 @@ app.use("/conversations", conversationRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+<<<<<<< HEAD
 app.get("/", (req, res) => {
   const templateVars = { username: req.session.name };
   res.render("index", templateVars);
@@ -90,15 +92,41 @@ app.get("/favorites", (req, res) => {
   let values = [req.session['user_id']];
   return db.query(queryString, values)
     .then(data => {
+=======
+// app.get("/", (req, res) => {
+//   const templateVars = { username: req.session.name };
+//   res.render("index", templateVars);
+// });
+
+app.get("/favorites", (req, res) => {
+  let queryString = `SELECT favorites.id, favorites.item_id, favorites.user_id, photo_url as photo, items.title as title, items.price as price, items.owner_id as seller
+FROM favorites
+JOIN photo_urls ON photo_urls.item_id = favorites.item_id
+JOIN items ON items.id = favorites.item_id
+WHERE favorites.user_id = $1
+ORDER BY favorites.id;`;
+  let values = [req.session["user_id"]];
+  return db
+    .query(queryString, values)
+    .then((data) => {
+>>>>>>> master
       const items = data.rows;
       console.log(items);
       const templateVars = {
         items: items,
+<<<<<<< HEAD
         username: req.session['name']
       };
       res.render("books/favorites", templateVars);
     })
     .catch(err => console.log(err));
+=======
+        username: req.session["name"],
+      };
+      res.render("books/favorites", templateVars);
+    })
+    .catch((err) => console.log(err));
+>>>>>>> master
 });
 
 app.listen(PORT, () => {
@@ -114,9 +142,16 @@ app.post("/:itemId/addfavorite", (req, res) => {
   let values = [req.params["itemId"], req.session["user_id"]];
   // ==> Need to write a function helper for checking if the favorite (item / user pair) already exists
   // in the db and return true or false -- with a db query
+<<<<<<< HEAD
   return db.query(queryString, values)
     .then(res => res.rows[0])
     .catch(err => console.log(err));
+=======
+  return db
+    .query(queryString, values)
+    .then((res) => res.rows[0])
+    .catch((err) => console.log(err));
+>>>>>>> master
 });
 
 // to remove a book from the favorites table from the favorites page;
@@ -125,11 +160,14 @@ app.post("/remove-from-fav/:id", (req, res) => {
   DELETE FROM favorites
   WHERE id = $1;`;
   let values = [req.params["id"]];
+<<<<<<< HEAD
   return db.query(queryString, values)
     .then(() => res.redirect("/favorites"))
     .catch(err => console.log(err));
+=======
+  return db
+    .query(queryString, values)
+    .then(() => res.redirect("/favorites"))
+    .catch((err) => console.log(err));
+>>>>>>> master
 });
-
-
-
-
