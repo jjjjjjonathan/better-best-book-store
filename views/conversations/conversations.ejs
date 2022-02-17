@@ -13,7 +13,7 @@
         <% for (const thread of messages) { %>
           <a href="/conversations/<%= thread.id %>">
             <div class="thread-body">
-              <h4><%= thread.message_count %> messages between <%= thread.name1 %> and <%= thread.name2 %></h4>
+              <h4>Messages between <%= thread.name1 %> and <%= thread.name2 %> talking about <%= thread.item_title %>.</h4>
             </div>
             <div class="thread-footer">
               <h5>Last message was sent <%= thread.last_message_time %> by <%= thread.last_sender %>.</h5>

@@ -8,12 +8,13 @@ module.exports = db => {
     if (!userId) {
       res.render("index");
     } else {
-      return db.query(`SELECT conversations.id, MAX(users_1.username) as name1, MAX(users_2.username) as name2, MAX(messages.sent_at) as last_message_time, MAX(users_3.username) as last_sender
+      return db.query(`SELECT conversations.id, MAX(users_1.username) as name1, items.title AS item_title, MAX(users_2.username) as name2, MAX(messages.sent_at) as last_message_time, MAX(users_3.username) as last_sender
       FROM conversations
       JOIN messages ON messages.conversation_id = conversations.id
       JOIN users AS users_1 ON conversations.user1_id = users_1.id
       JOIN users AS users_2 ON conversations.user2_id = users_2.id
       JOIN users AS users_3 ON messages.sender_id = users_3.id
+      JOIN items ON messages.item_id = items.id
       WHERE (conversations.user1_id = $1
       OR conversations.user2_id = $1)
       AND messages.id IN (
@@ -22,9 +23,10 @@ module.exports = db => {
         JOIN conversations ON conversations.id = messages.conversation_id
         GROUP BY conversations.id
       )
-      GROUP BY conversations.id;`, [userId])
+      GROUP BY conversations.id, items.title;`, [userId])
         .then(data => {
           const messages = data.rows;
+          console.log(messages)
           if (messages.length > 0) {
             for (const message of messages) {
               message['last_message_time'] = timeago.format(message['last_message_time']);
@@ -51,7 +53,7 @@ module.exports = db => {
         return db.query(`INSERT INTO messages (item_id, sender_id, conversation_id, message_body)
         VALUES (${req.body.item_id}, ${req.session.user_id}, ${data.rows[0].id}, $1)`, [req.body.message])
           .then(() => {
-            res.redirect('/conversations');
+            res.redirect(`/books/item/${req.body.item_id}`);
           });
       });
   });
