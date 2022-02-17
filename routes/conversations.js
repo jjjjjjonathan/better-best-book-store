@@ -31,10 +31,10 @@ module.exports = db => {
             for (const message of messages) {
               message['last_message_time'] = timeago.format(message['last_message_time']);
             }
-            const templateVars = { messages: messages };
+            const templateVars = { messages, username: req.session['name'] };
             res.render('conversations/conversations', templateVars);
           } else {
-            const templateVars = { messages: null };
+            const templateVars = { messages: null, username: req.session['name'] };
             res.render('conversations/conversations', templateVars);
           }
         })
@@ -59,13 +59,14 @@ module.exports = db => {
   });
 
   router.get('/:id', (req, res) => {
-    return db.query(`SELECT messages.*, items.id AS item_id, users.username as sender, users_1.username as user1, users_2.username as user2, users_1.id as id1, users_2.id as id2
+    return db.query(`SELECT messages.*, items.id AS item_id, users.username as sender, users_1.username as user1, users_2.username as user2, users_1.id as id1, users_2.id as id2, items.title AS item_title, photo_urls.photo_url AS item_photo_url, items.price as item_price
     FROM messages
     JOIN conversations ON conversations.id = messages.conversation_id
     JOIN users ON messages.sender_id = users.id
     JOIN users AS users_1 ON conversations.user1_id = users_1.id
     JOIN users AS users_2 ON conversations.user2_id = users_2.id
     JOIN items ON items.id = messages.item_id
+    JOIN photo_urls ON items.id = photo_urls.item_id
     WHERE conversations.id = $1
     ORDER BY sent_at DESC
     LIMIT 10;`, [req.params.id])
@@ -77,7 +78,7 @@ module.exports = db => {
           for (const message of messageThread) {
             message['sent_at'] = timeago.format(message['sent_at']);
           }
-          const templateVars = { messageThread, user: req.session['user_id'] };
+          const templateVars = { messageThread, username: req.session['name'] };
           res.render('conversations/thread', templateVars);
         } else {
           res.render('index');
