@@ -1,6 +1,5 @@
 $(() => {
   console.log("ready");
-  // getIsbn();
   $("#isbn-search").on('focusout', getIsbn);
 });
 
@@ -12,8 +11,10 @@ const getIsbn = () => {
         const bookInfo = data.items['0'].volumeInfo;
         $('#title-search').val(bookInfo.title);
       });
+  } else if (inputValue.length === 0) {
+    return;
   } else {
-    console.log('not isbn')
+    return;
   }
 };
 
