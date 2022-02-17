@@ -22,7 +22,7 @@
       <% } %>
     </section>
     <form action="/conversations/<%= messageThread[0].conversation_id %>" method="POST" id="message-reply">
-      <input type="hidden" name="convo_id" value="<%= messageThread[0].conversation_id %>">
+      <input type="hidden" name="item_id" value="<%= messageThread[0].item_id %>">
       <label for="message">Reply: </label>
       <input type="text" name="message">
       <button type="submit">Send</button>
