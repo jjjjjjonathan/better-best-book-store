@@ -20,39 +20,36 @@
 
 .bookmark {
   transform: rotate(90deg);
-  width :auto;
+  width: auto;
   height: 100%;
   align-content: center;
   margin-left: auto;
   margin-right: auto;
-
 }
 
 .bookmark h3 {
   transform: rotate(-90deg);
   background-image: url("https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/70054/yellow-bookmark-clipart-md.png");
-  width:auto;
+  width: auto;
   height: auto;
 }
 
-
-.cover-image{
-display: flex;
-flex-direction: column;
-align-items: center;
- img {
-max-width: 50%
- }
+.cover-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    max-width: 50%;
+  }
 }
 
 .desc-box {
+}
 
-  }
-
-  .book-title {
-    margin-left: 20%;
-    margin-right: 20%;
-  }
+.book-title {
+  margin-left: 20%;
+  margin-right: 20%;
+}
 
 .description {
   display: flex;
@@ -77,52 +74,52 @@ max-width: 50%
   display: inline-block;
 
   width: auto;
-	height: 38px;
+  height: 38px;
 
-	background-color: #e4b827;
-	-webkit-border-radius: 3px 4px 4px 3px;
-	-moz-border-radius: 3px 4px 4px 3px;
-	border-radius: 3px 4px 4px 3px;
+  background-color: #e4b827;
+  -webkit-border-radius: 3px 4px 4px 3px;
+  -moz-border-radius: 3px 4px 4px 3px;
+  border-radius: 3px 4px 4px 3px;
 
-	border-left: 1px solid #e4b827;
+  border-left: 1px solid #e4b827;
 
-	/* This makes room for the triangle */
-	margin-left: 19px;
+  /* This makes room for the triangle */
+  margin-left: 19px;
 
-	position: relative;
+  position: relative;
 
-	color: black;
-	font-weight: 300;
-	font-size: 22px;
-	line-height: 38px;
+  color: black;
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 38px;
 
-	padding: 0 10px 0 10px;
+  padding: 0 10px 0 10px;
 }
 
 /* Makes the triangle */
 .card-price:before {
-	content: "";
-	position: absolute;
-	display: block;
-	left: -19px;
-	width: 0;
-	height: 0;
-	border-top: 19px solid transparent;
-	border-bottom: 19px solid transparent;
-	border-right: 19px solid #e4b827;
+  content: "";
+  position: absolute;
+  display: block;
+  left: -19px;
+  width: 0;
+  height: 0;
+  border-top: 19px solid transparent;
+  border-bottom: 19px solid transparent;
+  border-right: 19px solid #e4b827;
 }
 
 /* Makes the circle */
 .card-price:after {
-	content: "";
-	background-color: white;
-	border-radius: 50%;
-	width: 4px;
-	height: 4px;
-	display: block;
-	position: absolute;
-	left: -9px;
-	top: 17px;
+  content: "";
+  background-color: white;
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  display: block;
+  position: absolute;
+  left: -9px;
+  top: 17px;
 }
 
 .genre {
@@ -134,7 +131,7 @@ max-width: 50%
 .buttons-item {
   display: flex;
   flex-direction: row;
-  align-content:space-between;
+  align-content: space-between;
   justify-self: center;
   margin-left: 40px;
 }
@@ -144,24 +141,24 @@ max-width: 50%
 }
 
 #fav-button i:hover {
-  color:#e4b827;
+  color: #e4b827;
 }
 #fav-button:focus {
-  color:#e4b827;
+  color: #e4b827;
 }
 
 @media only screen and (min-width: 990px) {
-  .container{
+  .container {
     display: flex;
     flex-direction: row;
     align-items: center;
   }
-  .bookmark{
+  .bookmark {
     transform: rotate(0deg);
   }
   .cover-image img {
-    max-width: 70%
-    }
+    max-width: 70%;
+  }
   .desc-box {
     width: 45%;
     flex-direction: row;
@@ -171,4 +168,3 @@ max-width: 50%
     padding-left: auto;
   }
 }
-

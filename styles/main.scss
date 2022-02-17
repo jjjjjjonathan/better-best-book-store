@@ -36,9 +36,36 @@ main {
   .row {
     margin: 10px auto;
   }
+  .desc-area {
+    margin: 20px 20px 40px;
+    .seller {
+      justify-content: center;
+    }
+    h2 {
+      display: flex;
+      justify-content: center;
+    }
+    .title-ref {
+      text-decoration: none;
+    }
+    .book-title {
+      margin: 0x auto;
+      align-items: center;
+    }
+  }
+  a.price-tag-box {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0px auto;
+  }
+  .img-area {
+    justify-content: center;
+  }
   img {
+    display: block;
     width: 209px;
     height: 315px;
+    margin: 0 auto;
   }
   h2 {
     font-size: 1.5em;
@@ -86,3 +113,11 @@ main {
   box-shadow: 6px 8px gray;
 }
 
+@media only screen and (min-width: 769px) {
+  .price-tag-box {
+    display: flex;
+  }
+  .card-price {
+    position: absolute;
+  }
+}

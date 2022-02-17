@@ -18,11 +18,12 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     <link rel="stylesheet" href="/styles/nav_bar.css" type="text/css" />
     <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
     <link rel="stylesheet" href="/styles/listings.scss" type="text/css" />
     <link rel="stylesheet" href="/styles/body.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/item_preview.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -82,10 +83,18 @@
                       <img src="<%= item.photo_url %>" alt="book picture" />
                     </a>
                   </div>
-                  <a href="/books/item/<%= item.id %>">
-                    <h2><%= item.title %></h2>
-                  </a>
-                  <p>Superseller: <%= item.username %></p>
+                  <div>
+                    <a href="/books/item/<%= item.id %>" class="price-tag-box">
+                      <p class="card-price">$ <%= item.price %></p>
+                    </a>
+                  </div>
+                  <div class="desc-area">
+                    <a href="/books/item/<%= item.id %>" class="title-ref">
+                      <h2 class="book-title"><%= item.title %></h2>
+                    </a>
+
+                    <p class="seller">Superseller: <%= item.username %></p>
+                  </div>
                 </div>
               </div>
               <% }); %>
@@ -103,10 +112,16 @@
                       <img src="<%= item.photo_url %>" alt="book picture" />
                     </a>
                   </div>
-                  <a href="/books/item/<%= item.id %>">
-                    <h2><%= item.title %></h2>
+                  <a href="/books/item/<%= item.id %>" class="price-tag-box">
+                    <p class="card-price">$ <%= item.price %></p>
                   </a>
-                  <p>Superseller: <%= item.username %></p>
+                  <div class="desc-area">
+                    <a href="/books/item/<%= item.id %>" class="title-ref">
+                      <h2 class="book-title"><%= item.title %></h2>
+                    </a>
+
+                    <p class="seller">Superseller: <%= item.username %></p>
+                  </div>
                 </div>
               </div>
               <% }); %>

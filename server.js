@@ -58,7 +58,6 @@ const { redirect } = require("express/lib/response");
 const conversationRoutes = require("./routes/conversations");
 const mainRoutes = require("./public/scripts/index");
 
-
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
@@ -83,7 +82,7 @@ app.use("/", mainRoutes(db));
 // });
 
 app.get("/favorites", (req, res) => {
-let queryString = `SELECT favorites.id, favorites.item_id, favorites.user_id, photo_url as photo, items.title as title, items.price as price, items.owner_id as seller, items.genre as genre
+  let queryString = `SELECT favorites.id, favorites.item_id, favorites.user_id, photo_url as photo, items.title as title, items.price as price, items.owner_id as seller, items.genre as genre
 FROM favorites
 JOIN photo_urls ON photo_urls.item_id = favorites.item_id
 JOIN items ON items.id = favorites.item_id
@@ -108,18 +107,38 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-
 // add books to favorite from the item page;
 app.post("/:itemId/addfavorite", (req, res) => {
   let queryString = `
   INSERT INTO favorites(item_id,user_id)
   VALUES ($1, $2)
   RETURNING *;`;
+<<<<<<< Updated upstream
   let values = [req.params["itemId"],req.session["user_id"]];
       return db.query(queryString, values)
       .then(() => {res.redirect(`/books/item/${values[0]}`)});
-});
+=======
+  let values = [req.params["itemId"], req.session["user_id"]];
 
+  let checkQueryString = `
+    SELECT * FROM favorites
+    WHERE item_id = $1 AND user_id =$2;`;
+  return db
+    .query(checkQueryString, values)
+    .then((res) => {
+      console.log(res.fields.length);
+      if (res.fields.length != 0) {
+        //  alert("You already added this item to your favorites"); // Problem to throw alert!
+      } else {
+        return db
+          .query(queryString, values)
+          .then((res) => res.redirect(`/books/item/${req.params["itemId"]}`))
+          .catch((err) => console.log(err));
+      }
+    })
+    .catch((err) => console.log(err));
+>>>>>>> Stashed changes
+});
 
 // to remove a book from the favorites table from the favorites page;
 app.post("/books/remove-from-fav/:id", (req, res) => {
