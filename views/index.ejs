@@ -70,34 +70,41 @@
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
         </ol>
         <div class="carousel-inner">
-          <% for (let i = 0; 4 > i; i += 4) { %>
+          <% for (let i = 0; 3 > i; i += 3) { %>
           <div class="carousel-item active">
             <div class="row">
-              <% items.slice(i, i + 4).map((item) => { %>
-
+              <% items.slice(i, i + 3).map((item) => { %>
               <div class="col-md-4">
                 <div class="single-box">
                   <div class="img-area">
-                    <img src="<%= item.photo_url %>" alt="book picture" />
+                    <a class="img" href="/books/item/<%= item.id %>">
+                      <img src="<%= item.photo_url %>" alt="book picture" />
+                    </a>
                   </div>
-                  <h2><%= item.title %></h2>
+                  <a href="/books/item/<%= item.id %>">
+                    <h2><%= item.title %></h2>
+                  </a>
                   <p>Superseller: <%= item.username %></p>
                 </div>
               </div>
               <% }); %>
             </div>
           </div>
-          <% } for (let i = 4; items.length > i; i += 4) { %>
+          <% } for (let i = 3; items.length > i; i += 3) { %>
           <div class="carousel-item">
             <div class="row">
-              <% items.slice(i, i + 4).map((item) => { %>
+              <% items.slice(i, i + 3).map((item) => { %>
 
               <div class="col-md-4">
                 <div class="single-box">
                   <div class="img-area">
-                    <img src="<%= item.photo_url %>" alt="book picture" />
+                    <a class="img" href="/books/item/<%= item.id %>">
+                      <img src="<%= item.photo_url %>" alt="book picture" />
+                    </a>
                   </div>
-                  <h2><%= item.title %></h2>
+                  <a href="/books/item/<%= item.id %>">
+                    <h2><%= item.title %></h2>
+                  </a>
                   <p>Superseller: <%= item.username %></p>
                 </div>
               </div>
