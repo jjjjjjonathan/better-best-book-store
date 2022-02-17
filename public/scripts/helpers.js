@@ -13,6 +13,14 @@ const searchQueryGenerator = (queryObj) => {
     queryParams.push(`%${queryObj.genre}%`);
     whereConditions.push(`items.genre ILIKE $${queryParams.length}`);
   }
+  if (queryObj['min-price']) {
+    queryParams.push(`${parseInt(queryObj['min-price'], 10)}`);
+    whereConditions.push(`items.price >= $${queryParams.length}`);
+  }
+  if (queryObj['max-price']) {
+    queryParams.push(`${parseInt(queryObj['max-price'], 10)}`);
+    whereConditions.push(`items.price <= $${queryParams.length}`);
+  }
   if (queryParams.length > 0) {
     queryString += ` WHERE ${whereConditions.join(
       " AND "
