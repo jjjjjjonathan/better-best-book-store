@@ -50,9 +50,38 @@
               <form method="POST" action="">
                 <button class="btn btn-outline-secondary" type="submit">Buy now <br /><i class="fa-solid fa-cart-arrow-down"></i></button>
               </form>
-              <form method="POST" action="">
+              <!-- <form method="POST" action="">
                 <button class="btn btn-outline-secondary" type="submit">Send a message <br /><i class="fa-regular fa-handshake"></i></button>
+              </form> -->
+
+              <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Make an offer <i class="fa-regular fa-handshake"></i></button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send a message to the seller</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form action="/conversations" method="POST" id="create-message">
+                  <div class="modal-body">
+                    <input type="hidden" value="<%= item.seller %>" name="owner_id">
+                    <input type="hidden" value="<%= item.id %>" name="item_id">
+                    <input name="message" type="text" placeholder="Write to seller"></input>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close <i class="fa-solid fa-xmark"></i></button>
+                    <button type="submit" class="btn btn-outline-secondary">Send <i class="fa-solid fa-envelope"></i></button>
+                  </div>
+                </div>
               </form>
+              </div>
+            </div>
+
+
               <form method="POST" action="/remove-from-fav/<%= item.id %>">
                 <button class="btn btn-outline-secondary" type="submit">Remove from favorites <br /><i class="fa-solid fa-heart-crack"></i></button>
               </form>
