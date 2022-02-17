@@ -90,11 +90,11 @@ JOIN items ON items.id = favorites.item_id
 WHERE favorites.user_id = $1
 ORDER BY favorites.id;`;
   let values = [req.session["user_id"]];
+
   return db
     .query(queryString, values)
     .then((data) => {
       const items = data.rows;
-      console.log(items);
       const templateVars = {
         items: items,
         username: req.session["name"],
@@ -117,32 +117,36 @@ app.post("/:itemId/addfavorite", (req, res) => {
   RETURNING *;`;
   let values = [req.params["itemId"],req.session["user_id"]];
 
-let checkQueryString = `
-    SELECT * FROM favorites
-    WHERE item_id = $1 AND user_id =$2;`;
-  return db.query(checkQueryString,values)
-  .then(res => {
-    console.log(res.fields.length)
-    if (res.fields.length != 0) {
-    //  alert("You already added this item to your favorites"); // Problem to throw alert!
-    } else {
+// let checkQueryString = `
+//     SELECT * FROM favorites
+//     WHERE item_id = $1 AND user_id =$2;`;
+  // return db.query(checkQueryString,values)
+  // .then(res => {
+  //   res.rows[0]
+  //   // console.log(res.fields.length)
+  //   // if (res.fields.length != 0) {
+  //   // alert("You already added this item to your favorites"); // Problem to throw alert!
+  //   // } else {
       return db.query(queryString, values)
-       .then(res => res.rows[0])
-       .catch(err => console.log(err));
-    }
-  })
-    .catch(err => console.log(err));
+      .then(() => {res.redirect(`/books/item/${values[0]}`)});
+    //    .catch(err => console.log(err));
+    // }
+  // })
+    // .catch(err => console.log(err));
 });
 
 
 // to remove a book from the favorites table from the favorites page;
-app.post("/remove-from-fav/:id", (req, res) => {
+app.post("/books/remove-from-fav/:id", (req, res) => {
+  console.log("item id:",req.params["id"])
   let queryString = `
   DELETE FROM favorites
   WHERE id = $1;`;
   let values = [req.params["id"]];
+  console.log(req.params)
+
   return db
     .query(queryString, values)
-    .then(() => res.redirect("/favorites"))
-    .catch((err) => console.log(err));
+    .then(() => {res.redirect(`/favorites`)});
+
 });

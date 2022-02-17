@@ -33,12 +33,14 @@
     <body>
       <%- include("../partials/_navbar") %>
       <% for(const item of items) { %>
-      <div class="container" onclick="window.location='/books/item/<%=item.item_id%>';">
+      <div class="container">
         <div class="bookmark">
          <h3><%= item.genre %></h3>
         </div>
-        <img id="cover-image" src="<%= item.photo %>" alt="" onclick="window.location='/books/item/<%=item.item_id%>';" />
-          <div class="desc-box">
+        <div class="cover-image">
+        <img src="<%= item.photo %>" alt="" onclick="window.location='/books/item/<%=item.item_id%>';" />
+        </div>
+        <div class="desc-box">
             <h1 class="book-title"><%= item.title %></h1>
             <a class="description"><%= item.description %></a>
             <br />
@@ -69,7 +71,7 @@
                   <form action="/conversations" method="POST" id="create-message">
                   <div class="modal-body">
                     <input type="hidden" value="<%= item.seller %>" name="owner_id">
-                    <input type="hidden" value="<%= item.id %>" name="item_id">
+                    <input type="hidden" value="<%= item.item_id %>" name="item_id">
                     <input name="message" type="text" placeholder="Write to seller"></input>
                   </div>
                   <div class="modal-footer">
@@ -82,8 +84,8 @@
             </div>
 
 
-              <form method="POST" action="/remove-from-fav/<%= item.id %>">
-                <button class="btn btn-outline-secondary" type="submit">Remove from favorites <br /><i class="fa-solid fa-heart-crack"></i></button>
+              <form method="POST" action="books/remove-from-fav/<%= item.id %>">
+                <button class="btn btn-outline-secondary" id ="unfavorite-button" type="submit">Remove from favorites <br /><i class="fa-solid fa-heart-crack"></i></button>
               </form>
             </div>
           </div>
