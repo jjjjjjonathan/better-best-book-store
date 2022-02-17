@@ -10,7 +10,7 @@ const cookieSession = require("cookie-session");
 const morgan = require("morgan");
 
 // PG database client/connection setup
-const { Pool } = require("pg");
+const { Pool, Query } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
@@ -105,6 +105,7 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
+
 // add books to favorite from the item page;
 app.post("/:itemId/addfavorite", (req, res) => {
   let queryString = `
@@ -112,12 +113,24 @@ app.post("/:itemId/addfavorite", (req, res) => {
   VALUES ($1, $2)
   RETURNING *;`;
   let values = [req.params["itemId"],req.session["user_id"]];
-  // ==> Need to write a function helper for checking if the favorite (item / user pair) already exists
-  // in the db and return true or false -- with a db query
-  return db.query(queryString, values)
-  .then(res => res.rows[0])
-  .catch(err => console.log(err));
+
+let checkQueryString = `
+    SELECT * FROM favorites
+    WHERE item_id = $1 AND user_id =$2;`;
+  return db.query(checkQueryString,values)
+  .then(res => {
+    console.log(res.fields.length)
+    if (res.fields.length != 0) {
+    //  alert("You already added this item to your favorites"); // Problem to throw alert!
+    } else {
+      return db.query(queryString, values)
+       .then(res => res.rows[0])
+       .catch(err => console.log(err));
+    }
+  })
+    .catch(err => console.log(err));
 });
+
 
 // to remove a book from the favorites table from the favorites page;
 app.post("/remove-from-fav/:id", (req, res) => {

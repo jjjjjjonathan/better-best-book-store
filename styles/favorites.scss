@@ -18,7 +18,7 @@
 }
 
 .bookmark {
-  width :20%;
+  width :auto;
   height: 100%;
   align-content: center;
 }
@@ -161,17 +161,9 @@
     width: 100%;
   }
 
-  // .buttons-item {
-  //   display: none;
-  // }
   .price-tag-box {
     padding-left: 50%;
   }
 }
 
-@media only screen and (max-width: 580px) {
-.nav-text {
-  display: none;
-}
 
-}
