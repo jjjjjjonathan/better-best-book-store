@@ -21,6 +21,7 @@ module.exports = (db) => {
           Seller: users.username,
           itemId: users.id,
           username: req.session['name'],
+          ownerId: users.owner_id
         };
         res.render("books/item_preview", templateVars);
       })

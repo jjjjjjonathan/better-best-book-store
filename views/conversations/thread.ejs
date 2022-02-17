@@ -4,17 +4,30 @@
 
   </head>
   <body>
-    <ul>
+
+    <h2>Message thread between <%= messageThread[0].user1 %> and <%= messageThread[0].user2 %></h2>
+    <section id="thread-container">
+      <p>-----------</p>
       <% for (const message of messageThread) { %>
-        <li>From <%= message.sender %>: <%= message.message_body %></li>
+        <div class="message-header">
+          <h4>From <%= message.sender %></h4>
+        </div>
+        <div class="message-body">
+          <p><%= message.message_body %></p>
+        </div>
+        <div class="message-footer">
+          <h5>Sent <%= message.sent_at %></h5>
+        </div>
+        <p>-----------</p>
       <% } %>
-    </ul>
+    </section>
     <form action="/conversations/<%= messageThread[0].conversation_id %>" method="POST" id="message-reply">
       <input type="hidden" name="convo_id" value="<%= messageThread[0].conversation_id %>">
       <label for="message">Reply: </label>
       <input type="text" name="message">
       <button type="submit">Send</button>
     </form>
+    <a href="/conversations">Back to inbox</a>
     <footer><%- include("../partials/_footer") %></footer>
   </body>
 </html>

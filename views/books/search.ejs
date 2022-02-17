@@ -29,21 +29,21 @@
     <form action="/books" method="GET" id="advanced-search-form" class="advanced-search-container">
       <h1>What are you looking for ?</h1>
       <div class="advanced-search-form">
-        <label for="title">Keywords or title <i class="fa-solid fa-key"></i></label>
+        <label for="title">Title <i class="fa-solid fa-key"></i></label>
         <input class="input-box" type="text" name="title">
       </div>
       <div class="advanced-search-form">
         <label for="isbn">ISBN</label>
-        <input class="input-box" type="text" maxlength="13" pattern="[0-9]" placeholder="Enter a 13-digit ISBN-13 number" name="isbn" oninvalid="alert('numbers only')">
+        <input class="input-box" type="disabled" maxlength="13" pattern="[0-9]" placeholder="cant type here" name="isbn" oninvalid="alert('numbers only')" readonly>
       </div>
       <div class="advanced-search-form">
         <label for="genre">Genre <i class="fa-solid fa-masks-theater"></i></label>
         <input class="input-box" type="text" name="genre">
       </div>
         <label for="min-price">Minimum price <i class="fa-solid fa-dollar-sign"></i></label>
-        <input type="text" name="min-price">
+        <input type="number" name="min-price">
         <label for="max-price">Maximum price <i class="fa-solid fa-dollar-sign"></i><i class="fa-solid fa-dollar-sign"></i></label>
-        <input class="input-box" type="text" name="max-price">
+        <input class="input-box" type="number" name="max-price">
       </div>
       <div class="advanced-search-form">
         <label for="location">Location <i class="fa-solid fa-earth-americas"></i></label>
