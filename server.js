@@ -89,17 +89,17 @@ JOIN photo_urls ON photo_urls.item_id = favorites.item_id
 JOIN items ON items.id = favorites.item_id
 WHERE favorites.user_id = $1
 ORDER BY favorites.id;`;
-  let values = [req.session["user_id"]];
+let values = [req.session["user_id"]];
 
-  return db
-    .query(queryString, values)
-    .then((data) => {
-      const items = data.rows;
-      const templateVars = {
-        items: items,
-        username: req.session["name"],
-      };
-      res.render("books/favorites", templateVars);
+return db
+  .query(queryString, values)
+  .then((data) => {
+    const items = data.rows;
+    const templateVars = {
+      items: items,
+      username: req.session["name"],
+    };
+    res.render("books/favorites", templateVars);
     })
     .catch((err) => console.log(err));
 });
@@ -116,23 +116,8 @@ app.post("/:itemId/addfavorite", (req, res) => {
   VALUES ($1, $2)
   RETURNING *;`;
   let values = [req.params["itemId"],req.session["user_id"]];
-
-// let checkQueryString = `
-//     SELECT * FROM favorites
-//     WHERE item_id = $1 AND user_id =$2;`;
-  // return db.query(checkQueryString,values)
-  // .then(res => {
-  //   res.rows[0]
-  //   // console.log(res.fields.length)
-  //   // if (res.fields.length != 0) {
-  //   // alert("You already added this item to your favorites"); // Problem to throw alert!
-  //   // } else {
       return db.query(queryString, values)
       .then(() => {res.redirect(`/books/item/${values[0]}`)});
-    //    .catch(err => console.log(err));
-    // }
-  // })
-    // .catch(err => console.log(err));
 });
 
 
