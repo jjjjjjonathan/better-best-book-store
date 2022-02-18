@@ -49,23 +49,17 @@ app.use(
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
-const widgetsPageRoutes = require("./routes/widgetsPage");
+
 const bookRoutes = require("./routes/books");
 const listingsRoutes = require("./routes/listings");
 const itemPreviewRoutes = require("./routes/item_preview");
 const authRoutes = require("./routes/auth");
-const { redirect } = require("express/lib/response");
 const conversationRoutes = require("./routes/conversations");
-const mainRoutes = require("./public/scripts/index");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+
 app.use("/books/item", itemPreviewRoutes(db));
-app.use("/widgets", widgetsPageRoutes(db));
 app.use("/books", bookRoutes(db));
 app.use("/listings", listingsRoutes(db));
 app.use("/auth", authRoutes(db));
