@@ -2,21 +2,20 @@
   background: black;
   overflow: hidden;
   background: #C33764;
-  background: -webkit-linear-gradient(rgba(29, 38, 113, 0.8), rgba(63, 0, 180, 0.8)), url("https://cdn.theatlantic.com/thumbor/ydPXKj5crBE1zEitukJNhgXix38=/0x0:2885x1623/1952x1098/media/img/mt/2019/10/Tang_Atlantic_BookTheFuture/original.jpg");
+  background: url("https://cdn.theatlantic.com/thumbor/ydPXKj5crBE1zEitukJNhgXix38=/0x0:2885x1623/1952x1098/media/img/mt/2019/10/Tang_Atlantic_BookTheFuture/original.jpg");
   height: 60vh;
   width: auto;
   display: flex;
   background-position: center;
-  opacity: 0.6;
+  background-size: 1000px;
+  opacity: 0.8;
   z-index: 1;
-  color: white;
+  color: black;
   flex-direction: column;
-  padding: 10%;
+  align-items: center;
+
 }
 
-.header-container h1 {
-  padding-bottom: 5%;
-}
 
 .header-container h3 {
   font-weight: 400;
@@ -25,7 +24,6 @@
 .divider-container {
   height: 30vh;
 }
-
 main {
   display: flex;
   flex-direction: row;
