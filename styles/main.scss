@@ -114,6 +114,35 @@ main {
   box-shadow: 6px 8px gray;
 }
 
+.carousel-inner img {
+  object-fit: cover;
+  height: 500px;
+}
+
+.drk:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: black;
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.carousel-caption {
+  transform: translateY(-50%);
+  bottom: 0;
+  top: 50%;
+  z-index: 2;
+}
+
+.carousel-caption h3 {
+  padding-bottom: 50px;
+}
+
 @media only screen and (min-width: 769px) {
   .price-tag-box {
     display: flex;
