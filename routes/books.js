@@ -37,7 +37,7 @@ module.exports = (db) => {
         const users = data.rows[0];
         console.log(users);
         if (users['owner_id'] === req.session['user_id']) {
-          res.redirect(`../../listings/user/item/edit/${users['item_id']}`);
+          res.redirect(`../../listings/${users['item_id']}`);
         } else {
           const templateVars = {
             id: users.item_id,
