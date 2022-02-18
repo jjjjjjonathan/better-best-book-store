@@ -23,26 +23,30 @@ module.exports = (db) => {
       )
       .then((data) => {
         const users = data.rows[0];
-        const templateVars = {
-          id: users.item_id,
-          cover: users.photo_url,
-          Title: users.title,
-          Description: users.description,
-          Price: users.price,
-          sold_status: users.sold_status,
-          Genre: users.genre,
-          Seller: users.username,
-          itemId: users.id,
-          username: req.session['name'],
-          ownerId: users.owner_id,
-          favoriteId: favoriteId
-        };
-        res.render("books/item_preview", templateVars);
+        if (users['owner_id'] === req.session['user_id']) {
+          res.redirect(`../../listings/user/item/edit/${users['item_id']}`);
+        } else {
+          const templateVars = {
+            id: users.item_id,
+            cover: users.photo_url,
+            Title: users.title,
+            Description: users.description,
+            Price: users.price,
+            sold_status: users.sold_status,
+            Genre: users.genre,
+            Seller: users.username,
+            itemId: users.id,
+            username: req.session['name'],
+            ownerId: users.owner_id,
+            favoriteId: favoriteId
+          };
+          res.render("books/item_preview", templateVars);
+        }
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
   return router;
-  };
+};
 
