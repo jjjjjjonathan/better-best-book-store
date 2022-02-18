@@ -4,6 +4,13 @@ Once Upon A Book is a bookstore where sellers can sell their used books, and buy
 
 ## Final Product
 
+!["Screenshot of homepage"](https://github.com/jjjjjjonathan/better-best-book-store/blob/master/docs/screenshots/homepage.png)
+
+!["Screenshot of messages page"](https://github.com/jjjjjjonathan/better-best-book-store/blob/master/docs/screenshots/messages.png)
+
+!["Screenshot of book listing page"](https://github.com/jjjjjjonathan/better-best-book-store/blob/master/docs/screenshots/buybook.png)
+
+!["Screenshot of favorites page"](https://github.com/jjjjjjonathan/better-best-book-store/blob/master/docs/screenshots/favorites.png)
 
 ## Dependencies
 
