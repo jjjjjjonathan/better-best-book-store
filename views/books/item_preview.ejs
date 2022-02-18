@@ -84,15 +84,9 @@
                   </div>
                 </div>
               <!-- </form> -->
-              <% if (favoriteId != undefined) { %>
-                <form method="POST" action="../remove-from-fav/<%= favoriteId%>">
-                  <button class="btn btn-outline-secondary" id="unfav-button" type="submit">Remove from favorites <br /><i class="fa-solid fa-heart-crack"></i></button>
-                </form>
-              <% } else { %>
-                <form method="POST" action="/<%=itemId%>/addfavorite">
+                <form method="POST" action="/favorites/<%= itemId %>">
                   <button class="btn btn-outline-secondary" id="fav-button" type="submit">Add to favorites <i class="fa-solid fa-heart"></i></button>
                 </form>
-                <% } %>
             </div>
           </div>
       </div>

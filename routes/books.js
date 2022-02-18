@@ -5,20 +5,16 @@ const router = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     console.log(req.query);
-    return db
-      .query(
-        searchQueryGenerator(req.query)[0],
-        searchQueryGenerator(req.query)[1]
-      )
+    return db.query(searchQueryGenerator(req.query)[0], searchQueryGenerator(req.query)[1])
       .then((data) => {
         const items = data.rows;
         if (items.length === 0) {
-          const templateVars = { items: null, username: req.session['name']};
+          const templateVars = { items: null, username: req.session['name'] };
           res.render("books/books", templateVars);
         } else {
           const templateVars = {
             items: items,
-            username:req.session['name'],
+            username: req.session['name'],
           };
           res.render("books/books", templateVars);
         }
@@ -34,23 +30,12 @@ module.exports = (db) => {
     res.render('books/search', templateVars);
   });
 
+
   router.get("/:id", (req, res) => {
-
-    // let favoriteId
-    // let values = [req.params.id,req.session["user_id"]];
-    // let checkQueryString = `
-    //     SELECT * FROM favorites
-    //     WHERE item_id = $1 AND user_id =$2;`;
-    //   db.query(checkQueryString,values)
-    //   .then(res => {
-    //     if (res.rows.length) {
-    //       console.log(res.rows)
-    //     return favoriteId= res.rows[0].id
-    //     }});
-
     return db.query(`SELECT * , photo_urls, username FROM items JOIN users ON users.id = owner_id JOIN photo_urls ON item_id = items.id WHERE items.id = $1 GROUP BY items.id, photo_urls.id, users.id;`, [req.params.id])
       .then((data) => {
         const users = data.rows[0];
+        console.log(users);
         if (users['owner_id'] === req.session['user_id']) {
           res.redirect(`../../listings/user/item/edit/${users['item_id']}`);
         } else {
@@ -65,16 +50,14 @@ module.exports = (db) => {
             Seller: users.username,
             itemId: users.id,
             username: req.session['name'],
-            ownerId: users.owner_id,
-            favoriteId: favoriteId
+            ownerId: users.owner_id
           };
           res.render("books/item_preview", templateVars);
         }
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
       });
   });
-
   return router;
 };
+
+
+
