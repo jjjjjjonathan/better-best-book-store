@@ -53,7 +53,7 @@ module.exports = db => {
         return db.query(`INSERT INTO messages (item_id, sender_id, conversation_id, message_body)
         VALUES (${req.body.item_id}, ${req.session.user_id}, ${data.rows[0].id}, $1)`, [req.body.message])
           .then(() => {
-            res.redirect(`/books/item/${req.body.item_id}`);
+            res.redirect(`/books/${req.body.item_id}`);
           });
       });
   });
