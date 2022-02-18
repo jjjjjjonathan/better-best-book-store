@@ -64,29 +64,56 @@
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active drk">
-              <img class="d-block w-100" src="https://cdn.theatlantic.com/thumbor/ydPXKj5crBE1zEitukJNhgXix38=/0x0:2885x1623/1952x1098/media/img/mt/2019/10/Tang_Atlantic_BookTheFuture/original.jpg" alt="First slide">
-              <div class="carousel-caption">
-                <h3>Give your books a second life.</h3>
-                <p>Check out our featured items from our super-sellers!</p>
-              </div>
-            </div>
-
-            <div class="carousel-item drk">
-              <img class="d-block w-100" src="https://cdn.theatlantic.com/thumbor/ydPXKj5crBE1zEitukJNhgXix38=/0x0:2885x1623/1952x1098/media/img/mt/2019/10/Tang_Atlantic_BookTheFuture/original.jpg" alt="First slide">
-
-              <a href="https://cdn.theatlantic.com/thumbor/ydPXKj5crBE1zEitukJNhgXix38=/0x0:2885x1623/1952x1098/media/img/mt/2019/10/Tang_Atlantic_BookTheFuture/original.jpg">
-
+              <img class="d-block w-100" src='<%= feature0.item_photo %>' alt="First slide">
+              <a href="/books/item/<%= feature0.item_id %>">
                 <div class="carousel-caption">
-                  <h5>Give your books a third life</h5>
-                  <p>Check out our featured items from our super-sellers!</p>
+                  <h3><%= feature0.item_title %></h3>
+                  <p><%= feature0.seller %> posted this <%= feature0.post_date %> for $<%= feature0.item_price %>.00</p>
                 </div>
               </a>
             </div>
-
+            <div class="carousel-item drk">
+              <img class="d-block w-100" src='<%= feature1.item_photo %>' alt="First slide">
+              <a href="/books/item/<%= feature1.item_id %>">
+                <div class="carousel-caption">
+                  <h3><%= feature1.item_title %></h3>
+                  <p><%= feature1.seller %> posted this <%= feature1.post_date %> for $<%= feature1.item_price %>.00</p>
+                </div>
+              </a>
+            </div>
+            <div class="carousel-item drk">
+              <img class="d-block w-100" src='<%= feature2.item_photo %>' alt="First slide">
+              <a href="/books/item/<%= feature2.item_id %>">
+                <div class="carousel-caption">
+                  <h3><%= feature2.item_title %></h3>
+                  <p><%= feature2.seller %> posted this <%= feature2.post_date %> for $<%= feature2.item_price %>.00</p>
+                </div>
+              </a>
+            </div>
+            <div class="carousel-item drk">
+              <img class="d-block w-100" src='<%= feature3.item_photo %>' alt="First slide">
+              <a href="/books/item/<%= feature3.item_id %>">
+                <div class="carousel-caption">
+                  <h3><%= feature3.item_title %></h3>
+                  <p><%= feature3.seller %> posted this <%= feature3.post_date %> for $<%= feature3.item_price %>.00</p>
+                </div>
+              </a>
+            </div>
+            <div class="carousel-item drk">
+              <img class="d-block w-100" src='<%= feature4.item_photo %>' alt="First slide">
+              <a href="/books/item/<%= feature4.item_id %>">
+                <div class="carousel-caption">
+                  <h3><%= feature4.item_title %></h3>
+                  <p><%= feature4.seller %> posted this <%= feature4.post_date %> for $<%= feature4.item_price %>.00</p>
+                </div>
+              </a>
+            </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -97,103 +124,6 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-
-
-      <!-- <div class="main-box">
-        <a class="title">Give your books a second life !</a>
-      </div> -->
-      <!-- implement caroussel -->
-      <!-- <div
-        id="carouselExampleIndicators"
-        class="carousel slide"
-        data-ride="carousel"
-      >
-        <ol class="carousel-indicators">
-          <li
-            data-target="#carouselExampleIndicators"
-            data-slide-to="0"
-            class="active"
-          ></li> -->
-          <!-- <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
-        <!-- </ol> -->
-        <!-- <div class="carousel-inner">
-          <% for (let i = 0; 3 > i; i += 3) { %>
-          <div class="carousel-item active">
-            <div class="row">
-              <% items.slice(i, i + 3).map((item) => { %>
-              <div class="col-md-4">
-                <div class="single-box">
-                  <div class="img-area">
-                    <a class="img" href="/books/item/<%= item.id %>">
-                      <img src="<%= item.photo_url %>" alt="book picture" />
-                    </a>
-                  </div>
-                  <div>
-                    <a href="/books/item/<%= item.id %>" class="price-tag-box">
-                      <p class="card-price">$ <%= item.price %></p>
-                    </a>
-                  </div>
-                  <div class="desc-area">
-                    <a href="/books/item/<%= item.id %>" class="title-ref">
-                      <h2 class="book-title"><%= item.title %></h2>
-                    </a>
-
-                    <p class="seller">Superseller: <%= item.username %></p>
-                  </div>
-                </div>
-              </div>
-              <% }); %>
-            </div>
-          </div>
-          <% } for (let i = 3; items.length > i; i += 3) { %>
-          <div class="carousel-item">
-            <div class="row">
-              <% items.slice(i, i + 3).map((item) => { %>
-
-              <div class="col-md-4">
-                <div class="single-box">
-                  <div class="img-area">
-                    <a class="img" href="/books/item/<%= item.id %>">
-                      <img src="<%= item.photo_url %>" alt="book picture" />
-                    </a>
-                  </div>
-                  <a href="/books/item/<%= item.id %>" class="price-tag-box">
-                    <p class="card-price">$ <%= item.price %></p>
-                  </a>
-                  <div class="desc-area">
-                    <a href="/books/item/<%= item.id %>" class="title-ref">
-                      <h2 class="book-title"><%= item.title %></h2>
-                    </a>
-
-                    <p class="seller">Superseller: <%= item.username %></p>
-                  </div>
-                </div>
-              </div>
-              <% }); %>
-            </div>
-          </div>
-          <% } %>
-        </div>
-        <a
-          class="carousel-control-prev"
-          href="#carouselExampleIndicators"
-          role="button"
-          data-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a
-          class="carousel-control-next"
-          href="#carouselExampleIndicators"
-          role="button"
-          data-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div> -->
       <div class="central-box">
         <div class="buy-box" onclick="window.location='/books/search';">
           <h1>Buy books</h1>
@@ -202,9 +132,6 @@
           <h1>Sell books</h1>
         </div>
       </div>
-      <!-- <div class="new-books" onclick="window.location='www.google.com';">
-        <h1>Check out what's new</h1>
-      </div> -->
     </main>
     <footer><%- include("partials/_footer") %></footer>
 
