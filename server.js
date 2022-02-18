@@ -8,9 +8,11 @@ const express = require("express");
 const app = express();
 const cookieSession = require("cookie-session");
 const morgan = require("morgan");
+const timeago = require("timeago.js");
+const { randomFeaturedItems } = require('./public/scripts/helpers');
 
 // PG database client/connection setup
-const { Pool, Query } = require("pg");
+const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
@@ -47,28 +49,19 @@ app.use(
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
-const widgetsPageRoutes = require("./routes/widgetsPage");
+const authRoutes = require("./routes/auth");
 const bookRoutes = require("./routes/books");
 const listingsRoutes = require("./routes/listings");
-const itemPreviewRoutes = require("./routes/item_preview");
-const authRoutes = require("./routes/auth");
-const { redirect } = require("express/lib/response");
 const conversationRoutes = require("./routes/conversations");
-const mainRoutes = require("./public/scripts/index");
+const favoriteRoutes = require("./routes/favorites");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
-app.use("/books/item", itemPreviewRoutes(db));
-app.use("/widgets", widgetsPageRoutes(db));
+app.use("/auth", authRoutes(db));
 app.use("/books", bookRoutes(db));
 app.use("/listings", listingsRoutes(db));
-app.use("/auth", authRoutes(db));
 app.use("/conversations", conversationRoutes(db));
-app.use("/", mainRoutes(db));
+app.use("/favorites", favoriteRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
 
@@ -81,54 +74,34 @@ app.use("/", mainRoutes(db));
 //   res.render("index", templateVars);
 // });
 
-app.get("/favorites", (req, res) => {
-  let queryString = `SELECT favorites.id, favorites.item_id, favorites.user_id, photo_url as photo, items.title as title, items.price as price, items.owner_id as seller, items.genre as genre
-FROM favorites
-JOIN photo_urls ON photo_urls.item_id = favorites.item_id
-JOIN items ON items.id = favorites.item_id
-WHERE favorites.user_id = $1
-ORDER BY favorites.id;`;
-let values = [req.session["user_id"]];
-
-return db
-  .query(queryString, values)
-  .then((data) => {
-    const items = data.rows;
-    const templateVars = {
-      items: items,
-      username: req.session["name"],
-    };
-    res.render("books/favorites", templateVars);
+app.get("/", (req, res) => {
+  return db.query(`SELECT items.id AS item_id, items.title AS item_title, items.price AS item_price, users.username AS seller, items.created_at AS post_date, photo_urls.photo_url AS item_photo
+  FROM items
+  JOIN users ON users.id = items.owner_id
+  JOIN photo_urls ON photo_urls.item_id = items.id
+  WHERE users.super_seller = true
+  AND items.sold_status = false;`)
+    .then((data) => {
+      const items = data.rows;
+      for (const item of items) {
+        item['post_date'] = timeago.format(item['post_date']);
+      }
+      const i = randomFeaturedItems(items.length);
+      const templateVars = {
+        username: req.session["name"],
+        feature0: items[i[0]],
+        feature1: items[i[1]],
+        feature2: items[i[2]],
+        feature3: items[i[3]],
+        feature4: items[i[4]]
+      };
+      res.render("index", templateVars);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
-});
-
-// add books to favorite from the item page;
-app.post("/:itemId/addfavorite", (req, res) => {
-  let queryString = `
-  INSERT INTO favorites(item_id,user_id)
-  VALUES ($1, $2)
-  RETURNING *;`;
-  let values = [req.params["itemId"],req.session["user_id"]];
-      return db.query(queryString, values)
-      .then(() => {res.redirect(`/books/item/${values[0]}`)});
-});
-
-// to remove a book from the favorites table from the favorites page;
-app.post("/books/remove-from-fav/:id", (req, res) => {
-  console.log("item id:",req.params["id"])
-  let queryString = `
-  DELETE FROM favorites
-  WHERE id = $1;`;
-  let values = [req.params["id"]];
-  console.log(req.params)
-
-  return db
-    .query(queryString, values)
-    .then(() => {res.redirect(`/favorites`)});
-
 });
