@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
   <link rel="stylesheet" href="/styles/body.css" type="text/css" />
 
+
   <!-- <link rel="stylesheet" href="/styles/item_preview.css" type="text/css" /> -->
   <link rel="stylesheet" href="/styles/nav_bar.css" type="text/css" />
   <link rel="stylesheet" href="/styles/books.css" type="text/css" />
@@ -36,22 +37,54 @@
   </head>
     <body>
       <%- include("../partials/_navbar") %>
-      <% for(const item of items) { %>
-      <div class="container" onclick="window.location='/books/item/<%=item.id%>';">
-        <div class="bookmark">
-         <h3><%= item.genre %></h3>
+
+      <% if (!items) { %>
+        <div class="container" id="failed-search-container">
+          <h3>Your search yielded no results. Try making another one.</h3>
+          <form action="/books" method="GET" id="advanced-search-form" class="advanced-search-container">
+            <div class="advanced-search-form">
+              <label for="title">Title <i class="fa-solid fa-key"></i></label>
+              <input class="input-box" type="text" name="title">
+            </div>
+            <div class="advanced-search-form">
+              <label for="isbn">ISBN</label>
+              <input class="input-box" type="disabled" maxlength="13" pattern="[0-9]" placeholder="cant type here" name="isbn" oninvalid="alert('numbers only')" readonly>
+            </div>
+            <div class="advanced-search-form">
+              <label for="genre">Genre <i class="fa-solid fa-masks-theater"></i></label>
+              <input class="input-box" type="text" name="genre">
+            </div>
+            <div class="advanced-search-form">
+              <label for="min-price">Minimum price <i class="fa-solid fa-dollar-sign"></i></label>
+              <input type="number" name="min-price" class="input-box">
+            </div>
+            <div class="advanced-search-form">
+              <label for="max-price">Maximum price <i class="fa-solid fa-dollar-sign"></i><i class="fa-solid fa-dollar-sign"></i></label>
+              <input class="input-box" type="number" name="max-price">
+            </div>
+            <div class="advanced-search-button">
+              <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </div>
+          </form>
         </div>
-        <img class="cover-image" src="<%= item.photo_url %>" alt="" />
-          <div class="desc-box">
-            <h1 class="book-title"><%= item.title %></h1>
-            <a class="description"><%= item.description %></a>
-            <br />
-              <div class="price-tag-box">
-              <p class="card-price">$<%= item.price %></p>
-              </div>
-            <br />
+      <% } else { %>
+        <% for(const item of items) { %>
+        <div class="container" onclick="window.location='/books/item/<%=item.id%>';">
+          <div class="bookmark">
+           <h3><%= item.genre %></h3>
           </div>
-      </div>
+          <img class="cover-image" src="<%= item.photo_url %>" alt="" />
+            <div class="desc-box">
+              <h1 class="book-title"><%= item.title %></h1>
+              <a class="description"><%= item.description %></a>
+              <br />
+                <div class="price-tag-box">
+                <p class="card-price">$<%= item.price %></p>
+                </div>
+              <br />
+            </div>
+        </div>
+        <% } %>
       <% } %>
       <footer><%- include("../partials/_footer") %></footer>
     <!-- Bootstrap plugin JS -->
