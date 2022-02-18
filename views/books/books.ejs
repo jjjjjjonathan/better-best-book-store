@@ -69,7 +69,7 @@
         </div>
       <% } else { %>
         <% for(const item of items) { %>
-        <div class="container" onclick="window.location='/books/item/<%=item.id%>';">
+        <div class="container" onclick="window.location='/books/<%=item.id%>';">
           <div class="bookmark">
            <h3><%= item.genre %></h3>
           </div>
