@@ -3,7 +3,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   //list of all items that user sell route
-  router.get("/user", (req, res) => {
+  router.get("/", (req, res) => {
     const userId = req.session.user_id;
     if (!userId) {
       res.redirect("/");
@@ -27,8 +27,44 @@ module.exports = (db) => {
       });
   });
 
+  //create new items to sell routes
+  router.get("/new", (req, res) => {
+    const userId = req.session.user_id;
+    if (!userId) {
+      res.redirect("/");
+    }
+    const templateVars = { username: req.session["name"] };
+    res.render("listings/new", templateVars);
+  });
+
+  router.post("/new", (req, res) => {
+    const userId = req.session.user_id;
+    if (!userId) {
+      res.redirect("/");
+    }
+    db.query(
+      `INSERT INTO items (owner_id, title, description, price, genre) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+      [
+        req.session["user_id"],
+        req.body.title,
+        req.body.description,
+        parseFloat(req.body.price),
+        req.body.genre,
+      ]
+    )
+      .then((item) => {
+        console.log("this is item:", item);
+        db.query(`INSERT INTO photo_urls (item_id,photo_url) VALUES ($1,$2);`, [
+          item.rows[0].id,
+          "",
+        ]);
+      })
+      .then(() => {
+        res.redirect("../");
+      });
+  });
   //list of all user sold items route
-  router.get("/user/sold", (req, res) => {
+  router.get("/sold", (req, res) => {
     const userId = req.session.user_id;
     if (!userId) {
       res.redirect("/");
@@ -55,7 +91,7 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/user/sold/:id", (req, res) => {
+  router.post("/sold/:id", (req, res) => {
     console.log(req.params.id);
     const userId = req.session.user_id;
     if (!userId) {
@@ -66,7 +102,7 @@ module.exports = (db) => {
         req.params.id,
       ])
       .then(() => {
-        res.redirect("/listings/user");
+        res.redirect("/listings");
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -74,7 +110,7 @@ module.exports = (db) => {
   });
 
   //route for delete item from the user sell items list and from database
-  router.post("/user/:item_id", (req, res) => {
+  router.post("/delete/:item_id", (req, res) => {
     console.log("this is req.params.item_id", req.params);
     const userId = req.session.user_id;
     if (!userId) {
@@ -83,12 +119,12 @@ module.exports = (db) => {
     return db
       .query(`DELETE FROM items WHERE items.id = $1`, [req.params.item_id])
       .then((data) => {
-        res.redirect(`/listings/user`);
+        res.redirect(`/listings`);
       });
   });
 
   //edit item from user selling lists route
-  router.get(`/user/item/edit/:id`, (req, res) => {
+  router.get(`/:id`, (req, res) => {
     const itemId = req.params.id;
     const userId = req.session.user_id;
     if (!userId) {
@@ -118,7 +154,7 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/user/item/edit/:id", (req, res) => {
+  router.post("/:id", (req, res) => {
     const itemId = req.params.id;
     const itemBody = req.body;
     const userId = req.session.user_id;
@@ -162,42 +198,7 @@ module.exports = (db) => {
       });
   });
 
-  //create new items to sell routes
-  router.get("/new", (req, res) => {
-    const userId = req.session.user_id;
-    if (!userId) {
-      res.redirect("/");
-    }
-    const templateVars = { username: req.session["name"] };
-    res.render("listings/new", templateVars);
-  });
 
-  router.post("/new", (req, res) => {
-    const userId = req.session.user_id;
-    if (!userId) {
-      res.redirect("/");
-    }
-    db.query(
-      `INSERT INTO items (owner_id, title, description, price, genre) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
-      [
-        req.session["user_id"],
-        req.body.title,
-        req.body.description,
-        parseFloat(req.body.price),
-        req.body.genre,
-      ]
-    )
-      .then((item) => {
-        console.log("this is item:", item);
-        db.query(`INSERT INTO photo_urls (item_id,photo_url) VALUES ($1,$2);`, [
-          item.rows[0].id,
-          "",
-        ]);
-      })
-      .then(() => {
-        res.redirect("../");
-      });
-  });
 
   return router;
 };

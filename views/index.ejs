@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Home Page</title>
+    <title>Once Upon A Book</title>
 
     <!-- Connecting CSS files -->
     <link
@@ -18,11 +18,12 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     <link rel="stylesheet" href="/styles/nav_bar.css" type="text/css" />
     <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
     <link rel="stylesheet" href="/styles/listings.scss" type="text/css" />
     <link rel="stylesheet" href="/styles/body.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/item_preview.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -51,84 +52,76 @@
 
   <body>
     <%- include("partials/_navbar") %>
+
+    <div class="header-container">
+      <h1>Give your book a second life</h1>
+      <h3>Buy used books that people love, or sell your books to eager readers.</h3>
+    </div>
+    <div class="divider-container">
+      <h2>Check out items from our featured sellers below!</h2>
+    </div>
     <main>
-      <div class="main-box">
-        <a class="title">Give your books a second life !</a>
-      </div>
-      <!-- implement caroussel -->
-      <div
-        id="carouselExampleIndicators"
-        class="carousel slide"
-        data-ride="carousel"
-      >
+      <!-- main carousel for featured items -->
+      <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
         <ol class="carousel-indicators">
-          <li
-            data-target="#carouselExampleIndicators"
-            data-slide-to="0"
-            class="active"
-          ></li>
-          <!-- <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
         </ol>
         <div class="carousel-inner">
-          <% for (let i = 0; 3 > i; i += 3) { %>
-          <div class="carousel-item active">
-            <div class="row">
-              <% items.slice(i, i + 3).map((item) => { %>
-              <div class="col-md-4">
-                <div class="single-box">
-                  <div class="img-area">
-                    <a class="img" href="/books/item/<%= item.id %>">
-                      <img src="<%= item.photo_url %>" alt="book picture" />
-                    </a>
-                  </div>
-                  <a href="/books/item/<%= item.id %>">
-                    <h2><%= item.title %></h2>
-                  </a>
-                  <p>Superseller: <%= item.username %></p>
+            <div class="carousel-item active drk">
+              <img class="d-block w-100" src='<%= feature0.item_photo %>' alt="First slide">
+              <a href="/books/<%= feature0.item_id %>">
+                <div class="carousel-caption">
+                  <h3><%= feature0.item_title %></h3>
+                  <p><%= feature0.seller %> posted this <%= feature0.post_date %> for $<%= feature0.item_price %>.00</p>
                 </div>
-              </div>
-              <% }); %>
+              </a>
             </div>
-          </div>
-          <% } for (let i = 3; items.length > i; i += 3) { %>
-          <div class="carousel-item">
-            <div class="row">
-              <% items.slice(i, i + 3).map((item) => { %>
-
-              <div class="col-md-4">
-                <div class="single-box">
-                  <div class="img-area">
-                    <a class="img" href="/books/item/<%= item.id %>">
-                      <img src="<%= item.photo_url %>" alt="book picture" />
-                    </a>
-                  </div>
-                  <a href="/books/item/<%= item.id %>">
-                    <h2><%= item.title %></h2>
-                  </a>
-                  <p>Superseller: <%= item.username %></p>
+            <div class="carousel-item drk">
+              <img class="d-block w-100" src='<%= feature1.item_photo %>' alt="First slide">
+              <a href="/books/<%= feature1.item_id %>">
+                <div class="carousel-caption">
+                  <h3><%= feature1.item_title %></h3>
+                  <p><%= feature1.seller %> posted this <%= feature1.post_date %> for $<%= feature1.item_price %>.00</p>
                 </div>
-              </div>
-              <% }); %>
+              </a>
             </div>
-          </div>
-          <% } %>
+            <div class="carousel-item drk">
+              <img class="d-block w-100" src='<%= feature2.item_photo %>' alt="First slide">
+              <a href="/books/<%= feature2.item_id %>">
+                <div class="carousel-caption">
+                  <h3><%= feature2.item_title %></h3>
+                  <p><%= feature2.seller %> posted this <%= feature2.post_date %> for $<%= feature2.item_price %>.00</p>
+                </div>
+              </a>
+            </div>
+            <div class="carousel-item drk">
+              <img class="d-block w-100" src='<%= feature3.item_photo %>' alt="First slide">
+              <a href="/books/<%= feature3.item_id %>">
+                <div class="carousel-caption">
+                  <h3><%= feature3.item_title %></h3>
+                  <p><%= feature3.seller %> posted this <%= feature3.post_date %> for $<%= feature3.item_price %>.00</p>
+                </div>
+              </a>
+            </div>
+            <div class="carousel-item drk">
+              <img class="d-block w-100" src='<%= feature4.item_photo %>' alt="First slide">
+              <a href="/books/<%= feature4.item_id %>">
+                <div class="carousel-caption">
+                  <h3><%= feature4.item_title %></h3>
+                  <p><%= feature4.seller %> posted this <%= feature4.post_date %> for $<%= feature4.item_price %>.00</p>
+                </div>
+              </a>
+            </div>
         </div>
-        <a
-          class="carousel-control-prev"
-          href="#carouselExampleIndicators"
-          role="button"
-          data-slide="prev"
-        >
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
-        <a
-          class="carousel-control-next"
-          href="#carouselExampleIndicators"
-          role="button"
-          data-slide="next"
-        >
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
@@ -141,9 +134,6 @@
           <h1>Sell books</h1>
         </div>
       </div>
-      <!-- <div class="new-books" onclick="window.location='www.google.com';">
-        <h1>Check out what's new</h1>
-      </div> -->
     </main>
     <footer><%- include("partials/_footer") %></footer>
 

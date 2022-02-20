@@ -42,34 +42,34 @@
             <a class="description"><%= Description %></a>
             <br />
               <div class="price-tag-box">
-              <p class="card-price">$<%= Price %></p>
+                <p class="card-price">$<%= Price %></p>
               </div>
             <br />
-        </div>
-      </div>
-    <div class="edit-box">
-      <h3>Edit your item</h3>
-      <form action="<%= id %>" method="POST" id="edit-form">
-        <label class="new-title" for="Title">Title</label>
-        <input class="new-title" type="text" name="Title" value="<%= Title %>" />
-        <br/>
-        <label class="new-image" for="image-url">Image</label>
-        <input class="new-image" type="text" name="photo_url" value="<%= cover %>" />
-        <br/>
-        <label class="new-description" for="Description">Description</label>
-        <input class="new-description"type="text" name="Description" value="<%= Description %>" />
-        <br/>
-        <label class="new-price" for="Price">Price ($)</label>
-        <input class="new-price" type="number" name="Price" value="<%= Price %>" />
-        <br/>
-        <label class="new-genre" for="Genre">Genre</label>
-        <input class="new-genre" type="text" name="Genre" value="<%= Genre %>" />
-        <br/>
-        <button class="btn btn-outline-secondary" type="submit" id="submit-edit">Submit</button>
-        <a href="/listings/user"><button class="btn btn-outline-secondary" type="button" id="submit-edit">Back</button></a>
-      </form>
-    </div>
           </div>
+        </div>
+      <div class="edit-box">
+        <h3>Edit your item</h3>
+        <form action="<%= id %>" method="POST" id="edit-form">
+          <label class="new-title" for="Title">Title</label>
+          <input class="new-title" type="text" name="Title" value="<%= Title %>" />
+          <br/>
+          <label class="new-image" for="image-url">Image</label>
+          <input class="new-image" type="text" name="photo_url" value="<%= cover %>" />
+          <br/>
+          <label class="new-description" for="Description">Description</label>
+          <input class="new-description"type="text" name="Description" value="<%= Description %>" />
+          <br/>
+          <label class="new-price" for="Price">Price ($)</label>
+          <input class="new-price" type="number" name="Price" value="<%= Price %>" />
+          <br/>
+          <label class="new-genre" for="Genre">Genre</label>
+          <input class="new-genre" type="text" name="Genre" value="<%= Genre %>" />
+          <br/>
+          <button class="btn btn-outline-secondary" type="submit" id="submit-edit">Submit</button>
+          <a href="/listings/"><button class="btn btn-outline-secondary" type="button" id="submit-edit">Back</button></a>
+        </form>
+      </div>
+    </div>
     <footer><%- include("../partials/_footer") %></footer>
     <!-- Bootstrap plugin JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

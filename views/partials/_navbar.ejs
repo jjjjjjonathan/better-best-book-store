@@ -1,7 +1,7 @@
 <!-- <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
 <script type="text/javascript" src="./routes/navbar.js"></script> -->
 
-<nav class="navbar fixed-top navbar-light bg-light">
+<nav class="navbar fixed-top navbar-light bg-light" id="sticky-nav">
   <a class="brand-typo" href="/">Once upon a book</a>
   <div class="nav-right">
     <% if (username) { %>
@@ -31,14 +31,14 @@
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" href="#">Settings</a>
-        <a class="dropdown-item" href="/listings/user">My items</a>
-        <a class="dropdown-item" href="/listings/user/sold">My sold items</a>
+        <a class="dropdown-item" href="/listings/">My items</a>
+        <a class="dropdown-item" href="/listings/sold">My sold items</a>
         <a class="dropdown-item" href="/conversations">My messages</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Log out</a>
       </div>
       <li class="nav-item">
-        <a class="nav-link" href="listings/new"
+        <a class="nav-link" href="../listings/new"
           ><i class="fa-solid fa-book"></i> Sell a book</a
         >
         <a class="nav-link" href="/books/search"

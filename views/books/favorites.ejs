@@ -39,7 +39,7 @@
          <h3><%= item.genre %></h3>
         </div>
         <div class="cover-image">
-        <img src="<%= item.photo %>" alt="" onclick="window.location='/books/item/<%=item.item_id%>';" />
+        <img src="<%= item.photo %>" alt="" onclick="window.location='/books/<%=item.item_id%>';" />
         </div>
         <div class="desc-box">
             <h1 class="book-title"><%= item.title %></h1>
@@ -50,12 +50,6 @@
               </div>
             <br />
             <div class="buttons-item">
-              <form method="POST" action="">
-                <button class="btn btn-outline-secondary" type="submit">Buy now <br /><i class="fa-solid fa-cart-arrow-down"></i></button>
-              </form>
-              <!-- <form method="POST" action="">
-                <button class="btn btn-outline-secondary" type="submit">Send a message <br /><i class="fa-regular fa-handshake"></i></button>
-              </form> -->
 
               <!-- Button trigger modal -->
             <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Make an offer <i class="fa-regular fa-handshake"></i></button>
@@ -85,7 +79,7 @@
             </div>
 
 
-              <form method="POST" action="books/remove-from-fav/<%= item.id %>">
+              <form method="POST" action="favorites/delete/<%= item.id %>">
                 <button class="btn btn-outline-secondary" id ="unfavorite-button" type="submit">Remove from favorites <br /><i class="fa-solid fa-heart-crack"></i></button>
               </form>
             </div>

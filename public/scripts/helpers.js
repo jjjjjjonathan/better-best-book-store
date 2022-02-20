@@ -33,4 +33,14 @@ const searchQueryGenerator = (queryObj) => {
   return [queryString, queryParams];
 };
 
-module.exports = { searchQueryGenerator };
+const randomFeaturedItems = num => {
+  const uniqueNums = [];
+  while (uniqueNums.length < 5) {
+    let randomNum = Math.floor(Math.random() * num);
+    if (!uniqueNums.includes(randomNum)) {
+      uniqueNums.push(randomNum);
+    }
+  } return uniqueNums;
+};
+
+module.exports = { searchQueryGenerator, randomFeaturedItems };
